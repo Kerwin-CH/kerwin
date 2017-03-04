@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.kerwin">
+
+    <!-- 去掉READ_LOGS权限-->
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!--开机启动添加 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <application
+        android:name="com.kerwin.I_Application"
+        android:allowBackup="true"
+        android:icon="@mipmap/icon"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="58afe41582b63526530011d2" />
+        <meta-data
+            android:name="UMENG_MESSAGE_SECRET"
+            android:value="b1827dcd58359a9e481649c60a04b179" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="YM-17" />
+
+        <activity android:name="com.kerwin.activity.SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".activity.MainActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:screenOrientation="landscape"
+            android:theme="@android:style/Theme.NoTitleBar" />
+        <activity
+            android:name="io.vov.vitamio.activity.InitActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|keyboard|keyboardHidden|navigation"
+            android:launchMode="singleTop"
+            android:theme="@android:style/Theme.NoTitleBar"
+            android:windowSoftInputMode="stateAlwaysHidden" />
+
+        <!--        <service
+                    android:name=".servies.I_PushService" />-->
+
+    </application>
+</manifest>
