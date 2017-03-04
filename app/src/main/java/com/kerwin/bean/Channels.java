@@ -1,10 +1,12 @@
 package com.kerwin.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by Kerwin on 2017/3/3.
  */
 
-public class Channels {
+public class Channels implements Serializable {
 
     private String url;
     private String name;

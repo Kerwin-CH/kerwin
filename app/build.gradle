@@ -38,5 +38,5 @@ dependencies {
     compile project(':PushSDK')
     compile project(':vitamio')
     compile 'com.android.support:support-v4:+'
-    compile 'com.alibaba:fastjson:1.2.24'
+    compile 'io.github.openfeign:feign-gson:9.4.0'
 }

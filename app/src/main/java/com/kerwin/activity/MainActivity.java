@@ -15,7 +15,7 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.alibaba.fastjson.JSON;
+import com.google.gson.Gson;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
@@ -53,7 +53,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_new);
+        setContentView(com.kerwin.R.layout.activity_main_new);
         initView();
         initChannels();
     }
@@ -62,7 +62,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 初始化UI
      */
     private void initView() {
-        videoView = (VideoView) findViewById(R.id.vv_video_view);
+        videoView = (VideoView) findViewById(com.kerwin.R.id.vv_video_view);
         videoView.setOnClickListener(this);
         mMediaController = new MediaController(this);
         videoView.setMediaController(mMediaController);
@@ -93,7 +93,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      */
     private void initChannels() {
         String jsonStr = Kutils.getJson(this, "kerwin_channel.json");
-        JsonsRootBean rootBean = (JsonsRootBean) JSON.parseArray(jsonStr, JsonsRootBean.class);
+        JsonsRootBean rootBean = (JsonsRootBean) new Gson().fromJson(jsonStr, JsonsRootBean.class);
         channelses = rootBean.getChannels();
         videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
     }
@@ -102,11 +102,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 弹窗显示
      */
     private void showPopipWindow() {
-        View view = LayoutInflater.from(this).inflate(R.layout.popup_window, null);
+        View view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
         popupWindow = new PopupWindow(view, 600, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setContentView(view);
-        channelListView = (ListView) view.findViewById(R.id.lv_channel_lsit);
-        View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+        channelListView = (ListView) view.findViewById(com.kerwin.R.id.lv_channel_lsit);
+        View viewRoot = LayoutInflater.from(this).inflate(com.kerwin.R.layout.activity_main, null);
         popupWindow.showAtLocation(viewRoot, Gravity.RIGHT, 0, 0);
         channelAdapter = new ChannelAdapter();
         channelListView.setAdapter(channelAdapter);
