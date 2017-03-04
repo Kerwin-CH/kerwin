@@ -5,6 +5,7 @@ android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
     sourceSets.main.jniLibs.srcDirs = ['libs']
+
     defaultConfig {
         applicationId "com.kerwin"
         minSdkVersion 15
@@ -37,4 +38,5 @@ dependencies {
     compile project(':PushSDK')
     compile project(':vitamio')
     compile 'com.android.support:support-v4:+'
+    compile 'com.alibaba:fastjson:1.2.24'
 }

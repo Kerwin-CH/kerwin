@@ -15,11 +15,15 @@ import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.fastjson.JSON;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
-import com.kerwin.bean.TvChannel;
+import com.kerwin.bean.Channels;
+import com.kerwin.bean.JsonsRootBean;
+import com.kerwin.utils.Kutils;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -40,33 +44,66 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private PopupWindow popupWindow;
     private VideoView videoView;
     private ListView channelListView;//频道列表
-    private ArrayList<TvChannel> channels = new ArrayList<>();
+    private List<Channels> channelses = new ArrayList<>();
     private ChannelAdapter channelAdapter;
     private MediaController mMediaController;
+
+    private int currentChannel = 0;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_new);
+        initView();
+        initChannels();
+    }
+
+    /**
+     * 初始化UI
+     */
+    private void initView() {
         videoView = (VideoView) findViewById(R.id.vv_video_view);
         videoView.setOnClickListener(this);
         mMediaController = new MediaController(this);
         videoView.setMediaController(mMediaController);
         videoView.requestFocus();
-        initChannels();
+        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                videoView.start();
+            }
+        });
+        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(MediaPlayer mp, int what, int extra) {
+                Toast.makeText(MainActivity.this, "播放错误" + what + "，尝试播放下一个", Toast.LENGTH_LONG).show();
+                if (channelses.size() > currentChannel - 1) {
+                    currentChannel = +1;
+                } else {
+                    currentChannel = 0;
+                }
+                videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+                return false;
+            }
+        });
     }
 
+    /**
+     * 初始化频道信息
+     */
     private void initChannels() {
-        channels.add(new TvChannel("CCTV-1综合高清", "http://gslbserv.itv.cmvideo.cn/HDcctv1.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8813322615956633846&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"));
-        channels.add(new TvChannel("CCTV-5体育高清", "http://gslbserv.itv.cmvideo.cn/HDcctv5.m3u8?authCode=07110409322147352675&stbId=003801FF001381001513BC20BA6E48D6&Contentid=4867251683694877276&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"));
-        channels.add(new TvChannel("湖南卫视高清", "http://122.96.52.11:8080/gitv_live/HNWS-HD/index.m3u8"));
-        channels.add(new TvChannel("广西卫视", "http://222.216.111.82:8088/ts000"));
-        channels.add(new TvChannel("海峡卫视高清", "http://iptv.ac.cn/fjtv.m3u8?id=3"));
+        String jsonStr = Kutils.getJson(this, "kerwin_channel.json");
+        JsonsRootBean rootBean = (JsonsRootBean) JSON.parseArray(jsonStr, JsonsRootBean.class);
+        channelses = rootBean.getChannels();
+        videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
     }
 
+    /**
+     * 弹窗显示
+     */
     private void showPopipWindow() {
         View view = LayoutInflater.from(this).inflate(R.layout.popup_window, null);
-        popupWindow = new PopupWindow(view, 800, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow = new PopupWindow(view, 600, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setContentView(view);
         channelListView = (ListView) view.findViewById(R.id.lv_channel_lsit);
         View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
@@ -78,16 +115,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(MainActivity.this, "选择频道：" + channels.get(position).getChannelName(), Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, "选择频道：" + channelses.get(position).getName(), Toast.LENGTH_LONG).show();
         if (!LibsChecker.checkVitamioLibs(this))
             return;
-        videoView.setVideoURI(Uri.parse(channels.get(position).getChannelUrl()));
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                videoView.start();
-            }
-        });
+        currentChannel = position;
+        videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
     }
 
 
@@ -139,12 +171,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     class ChannelAdapter extends BaseAdapter {
         @Override
         public int getCount() {
-            return channels.size();
+            return channelses.size();
         }
 
         @Override
         public Object getItem(int position) {
-            return channels.get(position);
+            return channelses.get(position);
         }
 
         @Override
@@ -165,8 +197,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.channelNameView.setText(channels.get(position).getChannelName());
-            viewHolder.channelUrlView.setText(channels.get(position).getChannelUrl());
+            viewHolder.channelNameView.setText(channelses.get(position).getName());
+            String url = channelses.get(position).getUrl();
+            viewHolder.channelUrlView.setText(url.length() > 35 ? url.substring(0, 32) + "..." : url);
             return convertView;
         }
     }
