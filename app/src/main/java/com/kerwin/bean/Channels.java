@@ -1,15 +1,25 @@
 package com.kerwin.bean;
 
-import java.io.Serializable;
+import io.realm.RealmObject;
 
 /**
  * Created by Kerwin on 2017/3/3.
  */
 
-public class Channels implements Serializable {
+public class Channels extends RealmObject {
 
     private String url;
     private String name;
+    private String id;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
     public void setUrl(String url) {
         this.url = url;
@@ -26,4 +36,5 @@ public class Channels implements Serializable {
     public String getName() {
         return name;
     }
+
 }

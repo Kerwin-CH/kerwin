@@ -20,9 +20,12 @@ import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
 import com.kerwin.bean.JsonsRootBean;
+import com.kerwin.utils.ComparatorChannels;
 import com.kerwin.utils.Kutils;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,6 +52,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private MediaController mMediaController;
 
     private int currentChannel = 0;
+    private View view;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMediaController = new MediaController(this);
         videoView.setMediaController(mMediaController);
         videoView.requestFocus();
+        view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
+        popupWindow = new PopupWindow(view, 650, ViewGroup.LayoutParams.MATCH_PARENT, true);
         videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
@@ -78,14 +84,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Toast.makeText(MainActivity.this, "播放错误" + what + "，尝试播放下一个", Toast.LENGTH_LONG).show();
                 if (channelses.size() > currentChannel - 1) {
-                    currentChannel = +1;
+                    currentChannel += 1;
                 } else {
                     currentChannel = 0;
                 }
-                videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+                videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+                // channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                if (popupWindow.isShowing())
+                    channelAdapter.notifyDataSetChanged();
                 return false;
             }
         });
+    }
+
+    /**
+     * 处理播放路径
+     *
+     * @param str
+     * @return
+     */
+    private String parseUrl(String str) {
+        String url = new String();
+        if (!str.startsWith("http")) {
+            url = "http://" + str;
+        }
+        url = str;
+        return url;
     }
 
     /**
@@ -95,15 +119,15 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String jsonStr = Kutils.getJson(this, "kerwin_channel.json");
         JsonsRootBean rootBean = (JsonsRootBean) new Gson().fromJson(jsonStr, JsonsRootBean.class);
         channelses = rootBean.getChannels();
-        videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+        Comparator comparator = new ComparatorChannels();
+        Collections.sort(channelses, comparator);
+        videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
     /**
      * 弹窗显示
      */
     private void showPopipWindow() {
-        View view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
-        popupWindow = new PopupWindow(view, 600, ViewGroup.LayoutParams.MATCH_PARENT, true);
         popupWindow.setContentView(view);
         channelListView = (ListView) view.findViewById(com.kerwin.R.id.lv_channel_lsit);
         View viewRoot = LayoutInflater.from(this).inflate(com.kerwin.R.layout.activity_main, null);
@@ -115,11 +139,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(MainActivity.this, "选择频道：" + channelses.get(position).getName(), Toast.LENGTH_LONG).show();
+        Toast.makeText(MainActivity.this, channelses.get(position).getName(), Toast.LENGTH_LONG).show();
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         currentChannel = position;
-        videoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+        videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
 
@@ -137,7 +161,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            showPopipWindow();
+            if (event.getY() > 500)
+                showPopipWindow();
         }
         return super.onTouchEvent(event);
     }

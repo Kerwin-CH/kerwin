@@ -1,20 +1,29 @@
 package com.kerwin.bean;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Kerwin on 2017/3/4.
  */
 
-public class JsonsRootBean implements Serializable {
-    private List<Channels> channels;
+public class JsonsRootBean {
+    private ArrayList<Channels> channels;
+    private String state;
 
-    public void setChannels(List<Channels> channels) {
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+
+    public void setChannels(ArrayList<Channels> channels) {
         this.channels = channels;
     }
 
-    public List<Channels> getChannels() {
+    public ArrayList<Channels> getChannels() {
         return channels;
     }
 }

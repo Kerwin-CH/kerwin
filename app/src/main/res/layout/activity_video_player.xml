@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/live_gl_rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <io.vov.vitamio.widget.CenterLayout
+            android:id="@+id/live_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/live_iv_videoimage"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone" />
+
+            <SurfaceView
+                android:id="@+id/myvideo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/live_iv_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mediacontroller_play"
+                android:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/live_iv_begin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/mediacontroller_play" />
+        </io.vov.vitamio.widget.CenterLayout>
+
+        <RelativeLayout
+            android:id="@+id/live_rl_clear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/live_cl"
+            android:visibility="gone">
+
+            <ImageButton
+                android:id="@+id/live_imgbt_play"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:background="@drawable/mediacontroller_button"
+                android:contentDescription="@string/mediacontroller_play_pause"
+                android:src="@drawable/mediacontroller_pause" />
+
+            <TextView
+                android:id="@+id/live_tv_current"
+                style="@style/MediaController_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/live_imgbt_play"
+                android:text="00:00:00" />
+
+            <TextView
+                android:id="@+id/live_tv_end"
+                style="@style/MediaController_Text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="5dp" />
+
+            <SeekBar
+                android:id="@+id/live_seekbar"
+                style="@style/MediaController_SeekBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@+id/live_tv_end"
+                android:layout_toRightOf="@+id/live_tv_current"
+                android:focusable="true"
+                android:max="1000" />
+        </RelativeLayout>
+    </RelativeLayout>
+</LinearLayout>

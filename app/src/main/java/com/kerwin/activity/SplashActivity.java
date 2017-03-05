@@ -16,6 +16,7 @@ public class SplashActivity extends BaseActivity {
         public void dispatchMessage(Message msg) {
             super.dispatchMessage(msg);
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+//            Intent intent = new Intent(SplashActivity.this, VideoActivity.class);
             I_Application.getInstance().startActivity(intent);
             SplashActivity.this.finish();
         }
