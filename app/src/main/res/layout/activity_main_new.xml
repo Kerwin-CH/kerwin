@@ -6,24 +6,36 @@
 
     <RelativeLayout
         android:id="@+id/rl_info_over_movie"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerHorizontal="true">
 
         <ProgressBar
             android:id="@+id/pb_movie_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:paddingTop="100dp" />
+            android:paddingTop="200dp" />
 
         <TextView
             android:id="@+id/tv_movie_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/pb_movie_load"
+            android:layout_marginTop="20dp"
+            android:text="速率：--kb/s"
+            android:textColor="@color/text_load_white"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_movie_buffer_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pb_movie_load"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp"
-            android:text="加载速度：--kb/s"
+            android:layout_toRightOf="@id/tv_movie_load"
+            android:text=",已缓存：--%"
             android:textColor="@color/text_load_white"
             android:textSize="13sp" />
     </RelativeLayout>

@@ -44,7 +44,7 @@ import io.vov.vitamio.widget.VideoView;
  * 说明：
  */
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
 
     private boolean quit = false; //设置退出标识
     private PopupWindow popupWindow;
@@ -59,6 +59,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private RelativeLayout overVideoInfoLayout;//播放界面上层提示信息布局
     private ProgressBar videoLoadProgressBar;
     private TextView videoLoadSpeedText;
+    private TextView videoBufferInfo;//缓存进度
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,26 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         setContentView(com.kerwin.R.layout.activity_main_new);
         initView();
         initChannels();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mVideoView.pause();
+        if (mVideoView != null) {
+            mVideoView.pause();
+        }
+    }
+
+
+    @Override
+    protected void onDestroy() {
+        // TODO Auto-generated method stub
+        super.onDestroy();
+        if (mVideoView != null) {
+            mVideoView.stopPlayback();
+            mVideoView = null;
+        }
     }
 
     /**
@@ -76,21 +97,24 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         overVideoInfoLayout = (RelativeLayout) findViewById(R.id.rl_info_over_movie);
         videoLoadProgressBar = (ProgressBar) findViewById(R.id.pb_movie_load);
         videoLoadSpeedText = (TextView) findViewById(R.id.tv_movie_load);
+        videoBufferInfo = (TextView) findViewById(R.id.tv_movie_buffer_info);
 
         mMediaController = new MediaController(this);//实例化控制器
-        mMediaController.show(5000);//控制器显示5s后自动隐藏
-        mVideoView.setMediaController(mMediaController);//绑定控制器
-        mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
+        // mMediaController.show(5000);//控制器显示5s后自动隐藏
+       // mVideoView.setMediaController(mMediaController);//绑定控制器
+        // mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
         mVideoView.requestFocus();//取得焦点
-        mVideoView.setBufferSize(1024 * 1024);
-
+        //mVideoView.setBufferSize(1024 * 1024);
+        mVideoView.setOnBufferingUpdateListener(this);
 
         view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
         popupWindow = new PopupWindow(view, 650, ViewGroup.LayoutParams.MATCH_PARENT, true);
+
+
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mVideoView.start();
+                mp.start();
             }
         });
         mVideoView.setOnInfoListener(this);
@@ -105,7 +129,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 }
 
                 mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
-                // channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
                 return false;
@@ -131,7 +155,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     mVideoView.pause();
                     overVideoInfoLayout.setVisibility(View.VISIBLE);
                     videoLoadSpeedText.setText("");
-
                 }
                 break;
             case MediaPlayer.MEDIA_INFO_BUFFERING_END:
@@ -146,6 +169,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     /**
+     * 缓存进度
+     *
+     * @param mp      the MediaPlayer the update pertains to
+     * @param percent the percentage (0-100) of the buffer that has been filled thus
+     */
+    @Override
+    public void onBufferingUpdate(MediaPlayer mp, int percent) {
+        videoBufferInfo.setText("| 已缓存：" + percent + "%");
+    }
+
+    /**
      * 处理播放路径
      *
      * @param str
@@ -155,9 +189,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String url = new String();
         if (!str.startsWith("http")) {
             url = "http://" + str;
-        } else {
-            url = str;
         }
+        url = str;
         return url;
     }
 
@@ -170,7 +203,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         channelses = rootBean.getChannels();
         Comparator comparator = new ComparatorChannels();
         Collections.sort(channelses, comparator);
-        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        mVideoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+        mVideoView.start();
     }
 
     /**
@@ -192,7 +226,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         currentChannel = position;
-        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        mVideoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
+        mVideoView.start();
     }
 
 
@@ -235,6 +270,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             finish();
         }
     }
+
 
     class ViewHolder {
         private TextView channelNameView;
@@ -285,4 +321,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             return convertView;
         }
     }
+
 }
