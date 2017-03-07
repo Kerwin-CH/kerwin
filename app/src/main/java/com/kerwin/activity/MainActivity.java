@@ -12,10 +12,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kerwin.I_Application;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
@@ -41,11 +44,11 @@ import io.vov.vitamio.widget.VideoView;
  * 说明：
  */
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener {
 
     private boolean quit = false; //设置退出标识
     private PopupWindow popupWindow;
-    private VideoView videoView;
+    private VideoView mVideoView;
     private ListView channelListView;//频道列表
     private List<Channels> channelses = new ArrayList<>();
     private ChannelAdapter channelAdapter;
@@ -53,6 +56,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private int currentChannel = 0;
     private View view;
+    private RelativeLayout overVideoInfoLayout;//播放界面上层提示信息布局
+    private ProgressBar videoLoadProgressBar;
+    private TextView videoLoadSpeedText;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -66,20 +72,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 初始化UI
      */
     private void initView() {
-        videoView = (VideoView) findViewById(com.kerwin.R.id.vv_video_view);
-        videoView.setOnClickListener(this);
-        mMediaController = new MediaController(this);
-        videoView.setMediaController(mMediaController);
-        videoView.requestFocus();
+        mVideoView = (VideoView) findViewById(com.kerwin.R.id.vv_video_view);
+        overVideoInfoLayout = (RelativeLayout) findViewById(R.id.rl_info_over_movie);
+        videoLoadProgressBar = (ProgressBar) findViewById(R.id.pb_movie_load);
+        videoLoadSpeedText = (TextView) findViewById(R.id.tv_movie_load);
+
+        mMediaController = new MediaController(this);//实例化控制器
+        mMediaController.show(5000);//控制器显示5s后自动隐藏
+        mVideoView.setMediaController(mMediaController);//绑定控制器
+        mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
+        mVideoView.requestFocus();//取得焦点
+        mVideoView.setBufferSize(1024 * 1024);
+
+
         view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
         popupWindow = new PopupWindow(view, 650, ViewGroup.LayoutParams.MATCH_PARENT, true);
-        videoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                videoView.start();
+                mVideoView.start();
             }
         });
-        videoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+        mVideoView.setOnInfoListener(this);
+        mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Toast.makeText(MainActivity.this, "播放错误" + what + "，尝试播放下一个", Toast.LENGTH_LONG).show();
@@ -88,13 +103,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 } else {
                     currentChannel = 0;
                 }
-                videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+
+                mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
                 // channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
                 return false;
             }
         });
+    }
+
+    /**
+     * 播放加载信息
+     *
+     * @param mp    the MediaPlayer the info pertains to.
+     * @param what  the type of info or warning.
+     *              <ul>
+     * @param extra an extra code, specific to the info. Typically implementation
+     *              dependant.
+     * @return
+     */
+    @Override
+    public boolean onInfo(MediaPlayer mp, int what, int extra) {
+        switch (what) {
+            case MediaPlayer.MEDIA_INFO_BUFFERING_START:
+                if (mVideoView.isPlaying()) {
+                    mVideoView.pause();
+                    overVideoInfoLayout.setVisibility(View.VISIBLE);
+                    videoLoadSpeedText.setText("");
+
+                }
+                break;
+            case MediaPlayer.MEDIA_INFO_BUFFERING_END:
+                mVideoView.start();
+                overVideoInfoLayout.setVisibility(View.GONE);
+                break;
+            case MediaPlayer.MEDIA_INFO_DOWNLOAD_RATE_CHANGED:
+                videoLoadSpeedText.setText("" + extra + "kb/s" + "  ");
+                break;
+        }
+        return true;
     }
 
     /**
@@ -107,8 +155,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String url = new String();
         if (!str.startsWith("http")) {
             url = "http://" + str;
+        } else {
+            url = str;
         }
-        url = str;
         return url;
     }
 
@@ -121,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         channelses = rootBean.getChannels();
         Comparator comparator = new ComparatorChannels();
         Collections.sort(channelses, comparator);
-        videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
     /**
@@ -143,25 +192,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         currentChannel = position;
-        videoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.vv_video_view:
-                showPopipWindow();
-                break;
-            default:
-                break;
-        }
+//        switch (v.getId()) {
+//            case R.id.vv_video_view:
+//                showPopipWindow();
+//                break;
+//            default:
+//                break;
+//        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (event.getY() > 500)
+            if (event.getX() > I_Application.screenHeight / 2)
                 showPopipWindow();
         }
         return super.onTouchEvent(event);
@@ -222,9 +271,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            viewHolder.channelNameView.setText(channelses.get(position).getName());
+            String channelName = channelses.get(position).getName();
+            viewHolder.channelNameView.setText(channelName);
             String url = channelses.get(position).getUrl();
             viewHolder.channelUrlView.setText(url.length() > 35 ? url.substring(0, 32) + "..." : url);
+            if (channelName.contains("CCTV")) {
+                viewHolder.channelIconView.setImageResource(R.mipmap.tv_cctv_icon);
+            } else if (channelName.contains("高清")) {
+                viewHolder.channelIconView.setImageResource(R.mipmap.tv_hd_icon);
+            } else {
+                viewHolder.channelIconView.setImageResource(R.mipmap.tv_normal_icon);
+            }
             return convertView;
         }
     }

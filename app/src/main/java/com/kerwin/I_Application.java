@@ -1,7 +1,9 @@
 package com.kerwin;
 
 import android.app.Application;
+import android.content.Context;
 import android.util.Log;
+import android.view.WindowManager;
 
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
@@ -18,6 +20,8 @@ import io.realm.RealmConfiguration;
 public class I_Application extends Application {
 
     private static I_Application mApplication;
+    public static int screenWidth;
+    public static int screenHeight;
 
     @Override
     public void onCreate() {
@@ -25,6 +29,11 @@ public class I_Application extends Application {
         mApplication = this;
         RealmConfiguration configuration = new RealmConfiguration.Builder(this).name("myRealm.realm").deleteRealmIfMigrationNeeded().build();
         Realm.setDefaultConfiguration(configuration);
+        WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
+
+        screenWidth = wm.getDefaultDisplay().getWidth();
+        screenHeight = wm.getDefaultDisplay().getHeight();
+
         PushAgent mPushAgent = PushAgent.getInstance(this);
         mPushAgent.setResourcePackageName("com.kerwin");
         //注册推送服务，每次调用register方法都会回调该接口

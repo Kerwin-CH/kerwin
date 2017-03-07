@@ -1,2 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="D:\Git\vitamio\src\main\assets"/><source path="D:\Git\vitamio\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\Git\vitamio\src\release\assets"/></dataSet></merger>
+<merger version="3"><dataSet config="main"><source path="D:\StudioWorkSpace\Kerwin\vitamio\src\main\assets"/><source path="D:\StudioWorkSpace\Kerwin\vitamio\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="D:\StudioWorkSpace\Kerwin\vitamio\src\release\assets"/></dataSet></merger>

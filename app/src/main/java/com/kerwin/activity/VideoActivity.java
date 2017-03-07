@@ -46,13 +46,9 @@ import io.vov.vitamio.widget.CenterLayout;
 
 public class VideoActivity extends BaseActivity implements SurfaceHolder.Callback, MediaPlayer.OnBufferingUpdateListener, MediaPlayer.OnCompletionListener, MediaPlayer.OnPreparedListener, MediaPlayer.OnVideoSizeChangedListener, View.OnTouchListener {
     private static final String TAG = "VideoActivity";
-    private int mVideoWidth;
-    private int mVideoHeight;
     private MediaPlayer mMediaPlayer;
     private SurfaceView mPreview;
     private SurfaceHolder holder;
-    private boolean mIsVideoSizeKnown = false;
-    private boolean mIsVideoReadyToBePlayed = false;
     private TextView txVideoTime;
     private SeekBar liveSeekBar;
     private Timer mTimer;
