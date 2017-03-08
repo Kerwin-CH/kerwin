@@ -1,7 +1,12 @@
 package com.kerwin.activity;
 
+import android.graphics.drawable.BitmapDrawable;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,7 +23,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.kerwin.I_Application;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
@@ -61,11 +65,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView videoLoadSpeedText;
     private TextView videoBufferInfo;//缓存进度
 
+    private AudioManager mAudioManager;
+    private int mMaxVolume;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.kerwin.R.layout.activity_main_new);
+
+        mAudioManager = (AudioManager) getSystemService(mApplication.AUDIO_SERVICE);
+        mMaxVolume = mAudioManager
+                .getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+
         initView();
+        if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this))
+            return;
         initChannels();
     }
 
@@ -100,11 +114,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         videoBufferInfo = (TextView) findViewById(R.id.tv_movie_buffer_info);
 
         mMediaController = new MediaController(this);//实例化控制器
-        // mMediaController.show(5000);//控制器显示5s后自动隐藏
-       // mVideoView.setMediaController(mMediaController);//绑定控制器
-        // mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
+        mMediaController.show(5000);//控制器显示5s后自动隐藏
+        mVideoView.setMediaController(mMediaController);//绑定控制器
+        mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
         mVideoView.requestFocus();//取得焦点
-        //mVideoView.setBufferSize(1024 * 1024);
+        mVideoView.setBufferSize(1024 * 1024);
         mVideoView.setOnBufferingUpdateListener(this);
 
         view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
@@ -115,21 +129,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public void onPrepared(MediaPlayer mp) {
                 mp.start();
+                videoLoadProgressBar.setVisibility(View.INVISIBLE);
+
             }
         });
         mVideoView.setOnInfoListener(this);
         mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Toast.makeText(MainActivity.this, "播放错误" + what + "，尝试播放下一个", Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this, "播放错误", Toast.LENGTH_SHORT).show();
                 if (channelses.size() > currentChannel - 1) {
                     currentChannel += 1;
                 } else {
                     currentChannel = 0;
                 }
-
-                mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
-                channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                //mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+                // channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
                 return false;
@@ -176,7 +191,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      */
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
-        videoBufferInfo.setText("| 已缓存：" + percent + "%");
+        videoBufferInfo.setText("   已缓存：" + percent + "%");
     }
 
     /**
@@ -189,8 +204,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String url = new String();
         if (!str.startsWith("http")) {
             url = "http://" + str;
-        }
-        url = str;
+        } else
+            url = str;
         return url;
     }
 
@@ -203,8 +218,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         channelses = rootBean.getChannels();
         Comparator comparator = new ComparatorChannels();
         Collections.sort(channelses, comparator);
-        mVideoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
-        mVideoView.start();
+        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
     /**
@@ -218,6 +232,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         channelAdapter = new ChannelAdapter();
         channelListView.setAdapter(channelAdapter);
         channelListView.setOnItemClickListener(this);
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());                            // 指定 PopupWindow 的背景
+        popupWindow.setFocusable(true);
     }
 
     @Override
@@ -226,29 +242,144 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         currentChannel = position;
-        mVideoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
-        mVideoView.start();
+        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
 
     @Override
     public void onClick(View v) {
-//        switch (v.getId()) {
-//            case R.id.vv_video_view:
-//                showPopipWindow();
-//                break;
-//            default:
-//                break;
-//        }
+        switch (v.getId()) {
+            case R.id.vv_video_view:
+                showPopipWindow();
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            if (event.getX() > I_Application.screenHeight / 2)
-                showPopipWindow();
+        switch (event.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                if (event.getX() > mApplication.screenWidth / 2) {
+                    showPopipWindow();
+                }
+                break;
+            case MotionEvent.ACTION_UP:
+                break;
+            case MotionEvent.ACTION_MOVE:
+                break;
         }
         return super.onTouchEvent(event);
+    }
+
+    private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+
+        /**
+         * 双击
+         */
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            if (mVideoView.isPlaying()) {
+                mVideoView.pause();
+            } else {
+                mVideoView.start();
+            }
+            return true;
+        }
+
+        /**
+         * 滑动
+         */
+        @Override
+        public boolean onScroll(MotionEvent e1, MotionEvent e2,
+                                float distanceX, float distanceY) {
+            float mOldX = e1.getX(), mOldY = e1.getY();
+            int y = (int) e2.getRawY();
+            int windowWidth = mApplication.screenWidth;
+            int windowHeight = mApplication.screenHeight;
+
+            if (mOldX > windowWidth * 4.0 / 5)// 右边滑动
+                // onVolumeSlide((mOldY - y) / windowHeight);
+                // else if (mOldX < windowWidth / 5.0)// 左边滑动
+                //  onBrightnessSlide((mOldY - y) / windowHeight);
+                return super.onScroll(e1, e2, distanceX, distanceY);
+        }
+
+
+        /**
+         * 定时隐藏
+         */
+        private Handler mDismissHandler = new Handler() {
+            @Override
+            public void handleMessage(Message msg) {
+                // mVolumeBrightnessLayout.setVisibility(View.GONE);
+            }
+        };
+
+/*    *//**
+         * 滑动改变声音大小
+         *
+         * @param percent
+         *//*
+    private void onVolumeSlide(float percent) {
+        if (mVolume == -1) {
+            mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+            if (mVolume < 0)
+                mVolume = 0;
+
+            // 显示
+            mOperationBg.setImageResource(R.drawable.video_volumn_bg);
+            mVolumeBrightnessLayout.setVisibility(View.VISIBLE);
+        }
+
+        int index = (int) (percent * mMaxVolume) + mVolume;
+        if (index > mMaxVolume)
+            index = mMaxVolume;
+        else if (index < 0)
+            index = 0;
+
+        // 变更声音
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
+
+        // 变更进度条
+        ViewGroup.LayoutParams lp = mOperationPercent.getLayoutParams();
+        lp.width = findViewById(R.id.operation_full).getLayoutParams().width
+                * index / mMaxVolume;
+        mOperationPercent.setLayoutParams(lp);
+    }
+
+    */
+
+        /**
+         * 滑动改变亮度
+         *
+         * @param percent
+         *//*
+    private void onBrightnessSlide(float percent) {
+        if (mBrightness < 0) {
+            mBrightness = getWindow().getAttributes().screenBrightness;
+            if (mBrightness <= 0.00f)
+                mBrightness = 0.50f;
+            if (mBrightness < 0.01f)
+                mBrightness = 0.01f;
+
+            // 显示
+            mOperationBg.setImageResource(R.drawable.video_brightness_bg);
+            mVolumeBrightnessLayout.setVisibility(View.VISIBLE);
+        }
+        WindowManager.LayoutParams lpa = getWindow().getAttributes();
+        lpa.screenBrightness = mBrightness + percent;
+        if (lpa.screenBrightness > 1.0f)
+            lpa.screenBrightness = 1.0f;
+        else if (lpa.screenBrightness < 0.01f)
+            lpa.screenBrightness = 0.01f;
+        getWindow().setAttributes(lpa);
+
+        ViewGroup.LayoutParams lp = mOperationPercent.getLayoutParams();
+        lp.width = (int) (findViewById(R.id.operation_full).getLayoutParams().width * lpa.screenBrightness);
+        mOperationPercent.setLayoutParams(lp);
+    }*/
     }
 
     @Override

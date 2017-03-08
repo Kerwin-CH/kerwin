@@ -7,7 +7,6 @@ import android.os.Message;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.kerwin.I_Application;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 
@@ -21,16 +20,15 @@ public class SplashActivity extends BaseActivity {
     private Handler mHandler = new Handler() {
         @Override
         public void dispatchMessage(Message msg) {
+            super.dispatchMessage(msg);
             if (msg.what == 0) {
                 progressBarLoad.setProgress(progress);
                 textLoadInfo.setText("载入中：" + progress + "%");
                 return;
             }
-            super.dispatchMessage(msg);
             Intent intent = new Intent(SplashActivity.this, MainActivity.class);
-//            Intent intent = new Intent(SplashActivity.this, VideoActivity.class);
-            I_Application.getInstance().startActivity(intent);
-            SplashActivity.this.finish();
+            startActivity(intent);
+            finish();
         }
     };
 

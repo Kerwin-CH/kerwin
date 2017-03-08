@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
         android:text="载入中，请稍候……"
         android:textColor="@color/text_load_white"
         android:textSize="13sp" />
@@ -21,9 +21,9 @@
         android:layout_width="match_parent"
         android:layout_height="4dp"
         android:layout_above="@id/tv_splash_load_info"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="100dp"
-        android:layout_marginRight="100dp" />
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="200dp"
+        android:layout_marginRight="200dp" />
 
 
 </RelativeLayout>
