@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <io.vov.vitamio.widget.VideoView
         android:id="@+id/vv_video_view"
         android:layout_width="match_parent"
@@ -13,14 +12,9 @@
 
     <RelativeLayout
         android:id="@+id/rl_info_over_movie"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
-
-        <ProgressBar
-            android:id="@+id/pb_movie_load"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true">
 
         <TextView
             android:id="@+id/tv_movie_buffer_info"
@@ -29,6 +23,8 @@
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="30dp"
             android:layout_marginTop="20dp"
+            android:background="@drawable/text_back_black"
+            android:gravity="center"
             android:text="--%"
             android:textColor="@color/text_load_white"
             android:textSize="13sp" />
@@ -37,14 +33,50 @@
             android:id="@+id/tv_movie_load"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignRight="@id/tv_movie_buffer_info"
+            android:layout_below="@id/tv_movie_buffer_info"
             android:layout_marginLeft="10dp"
-            android:layout_marginTop="20dp"
-            android:layout_toRightOf="@id/tv_movie_buffer_info"
+            android:background="@drawable/text_back_black"
+            android:gravity="center"
             android:text="--kb/s"
             android:textColor="@color/text_load_white"
             android:textSize="13sp" />
-
     </RelativeLayout>
 
+    <ProgressBar
+        android:id="@+id/pb_movie_load"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
 
+    <RelativeLayout
+        android:id="@+id/rl_vioce_controler"
+        android:layout_width="35dp"
+        android:layout_height="220dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="30dp"
+        android:background="@drawable/background"
+        android:padding="5dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:id="@+id/iv_control_icon"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:src="@mipmap/vice" />
+
+        <ProgressBar
+            android:id="@+id/pb_setting_value"
+            android:layout_width="15dp"
+            android:layout_height="220dp"
+            android:layout_below="@id/iv_control_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="10dp"
+            android:indeterminateOnly="false"
+            android:max="100"
+            android:progress="60"
+            android:progressDrawable="@drawable/vertical_progress_bar" />
+    </RelativeLayout>
 </RelativeLayout>
