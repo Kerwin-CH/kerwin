@@ -53,6 +53,14 @@ import io.vov.vitamio.widget.VideoView;
 public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
 
     private boolean quit = false; //设置退出标识
+    private final int DISMISS_COTROL_BAR = 0x001;
+    private final int SET_PROGRESS_VALUE = 0x002;
+
+
+    private final String USER_BRIGHTNESS = "kerwin_brightness";
+    private final String USER_VOLUME = "kerwin_volume";
+    private final String LAST_CANNEL = "kerwin_last_channel";
+
     private PopupWindow popupWindow;
     private VideoView mVideoView;
     private ListView channelListView;//频道列表
@@ -68,24 +76,59 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private TextView videoBufferInfo;//缓存进度
 
     private AudioManager mAudioManager;
-    private int mMaxVolume;
-    private int mVolume;
-    private float mBrightness;
+    private int mMaxVolume;//最大音量
+    private int mVolume = -1;//当前音量
+    private float mBrightness = -1f;//当前亮度
     private GestureDetectorCompat mDetector;
     private RelativeLayout viceSettingLayout;//音量、亮度布局
     private ImageView settingTypeIcon;//音量、亮度图标控件
     private ProgressBar valueProgressBar;//音量、亮度值进度条
+
+    /**
+     * 定时隐藏
+     */
+    private Handler mHandler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
+                case DISMISS_COTROL_BAR:
+                    viceSettingLayout.setVisibility(View.GONE);
+                    break;
+                case SET_PROGRESS_VALUE:
+                    int progress = (int) msg.obj;
+                    if (progress > 100) {
+                        progress = 100;
+                    } else if (progress < 0) {
+                        progress = 0;
+                    }
+                    valueProgressBar.setProgress(progress);
+
+            }
+        }
+    };
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(com.kerwin.R.layout.activity_main_new);
         mAudioManager = (AudioManager) getSystemService(mApplication.AUDIO_SERVICE);
-        mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mDetector = new GestureDetectorCompat(this, new MyGestureListener());
+        /**
+         * 获取用户上次启动设置的音量和亮度，并设置；
+         */
+        WindowManager.LayoutParams layoutPrarams = getWindow().getAttributes();
+        layoutPrarams.screenBrightness = sharedPreferences.getFloat(USER_BRIGHTNESS, -1f);
+        getWindow().setAttributes(layoutPrarams);
+        int volume = sharedPreferences.getInt(USER_VOLUME, -1);
+        mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+        //后去用户上次观看的频道
+        currentChannel = sharedPreferences.getInt(LAST_CANNEL, 0);
 
-        if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this))
-            return;
+
+        mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+        mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+        mBrightness = getWindow().getAttributes().screenBrightness;
         initView();
         initChannels();
     }
@@ -101,7 +144,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     protected void onDestroy() {
-        // TODO Auto-generated method stub
         super.onDestroy();
         if (mVideoView != null) {
             mVideoView.stopPlayback();
@@ -113,7 +155,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 初始化UI
      */
     private void initView() {
-        mVideoView = (VideoView) findViewById(com.kerwin.R.id.vv_video_view);
+        mVideoView = (VideoView) findViewById(R.id.vv_video_view);
         overVideoInfoLayout = (RelativeLayout) findViewById(R.id.rl_info_over_movie);
         videoLoadProgressBar = (ProgressBar) findViewById(R.id.pb_movie_load);
         videoLoadSpeedText = (TextView) findViewById(R.id.tv_movie_load);
@@ -235,15 +277,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      */
     private void showPopipWindow() {
         popupWindow.setContentView(view);
-        channelListView = (ListView) view.findViewById(com.kerwin.R.id.lv_channel_lsit);
-        View viewRoot = LayoutInflater.from(this).inflate(com.kerwin.R.layout.activity_main, null);
+        channelListView = (ListView) view.findViewById(R.id.lv_channel_lsit);
+        View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
         popupWindow.showAtLocation(viewRoot, Gravity.RIGHT, 0, 0);
         channelAdapter = new ChannelAdapter();
         channelListView.setAdapter(channelAdapter);
         channelListView.setOnItemClickListener(this);
-        popupWindow.setBackgroundDrawable(new BitmapDrawable());                            // 指定 PopupWindow 的背景
+        popupWindow.setBackgroundDrawable(new BitmapDrawable());// 指定 PopupWindow 的背景
         popupWindow.setFocusable(true);
     }
+
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -251,6 +294,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         if (!LibsChecker.checkVitamioLibs(this))
             return;
         currentChannel = position;
+        SPEditor.putInt(LAST_CANNEL, position);
+        SPEditor.apply();
         mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
@@ -260,23 +305,29 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
-        if (event.getX() > mApplication.screenWidth * 1 / 4 && event.getX() < mApplication.screenWidth * 3 / 4) {
-            showPopipWindow();
-        }
         return super.onTouchEvent(event);
     }
 
 
     private class MyGestureListener extends GestureDetector.SimpleOnGestureListener {
+        /**
+         * 单击显示popupWindow
+         *
+         * @param e
+         * @return
+         */
         @Override
-        public void onShowPress(MotionEvent e) {
-//            if (e.getX() > mApplication.screenWidth * 1 / 4 && e.getX() < mApplication.screenWidth * 3 / 4) {
-//                showPopipWindow();
-//            }
-            super.onShowPress(e);
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (popupWindow != null & popupWindow.isShowing()) {
+                popupWindow.dismiss();
+            } else {
+                showPopipWindow();
+            }
+            return super.onSingleTapConfirmed(e);
         }
 
         /**
@@ -293,21 +344,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         /**
-         * 定时隐藏
-         */
-        private Handler mDismissHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                viceSettingLayout.setVisibility(View.GONE);
-            }
-        };
-
-        /**
          * 滑动
          */
         @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
-            float mOldX = e1.getX(), mOldY = e1.getY();
+            float mOldX = e1.getRawX(), mOldY = e1.getRawY();
             int y = (int) e2.getRawY();
             int windowWidth = mApplication.screenWidth;
             int windowHeight = mApplication.screenHeight;
@@ -315,8 +356,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             if (mOldX > windowWidth * 4.0 / 5)// 右边滑动
                 onVolumeSlide((mOldY - y) / windowHeight);
             else if (mOldX < windowWidth / 5.0)// 左边滑动
-                onBrightnessSlide((mOldY - y) / windowHeight);
-            mDismissHandler.sendEmptyMessageDelayed(0, 2000);
+                onBrightnessSlide(distanceY / windowHeight);
+
+            mHandler.sendEmptyMessageDelayed(DISMISS_COTROL_BAR, 4000);
             return super.onScroll(e1, e2, distanceX, distanceY);
         }
 
@@ -326,11 +368,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
          * @param percent
          */
         private void onVolumeSlide(float percent) {
+
             if (mVolume == -1) {
                 mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                 if (mVolume < 0)
                     mVolume = 0;
+                // 显示
+                int index = (int) (mVolume * 100 / mMaxVolume);
+                Message msg = mHandler.obtainMessage();
+                msg.what = SET_PROGRESS_VALUE;
+                msg.obj = index;
+                mHandler.sendMessage(msg);
             }
+
             // 显示
             settingTypeIcon.setImageResource(R.mipmap.vice);
             viceSettingLayout.setVisibility(View.VISIBLE);
@@ -339,13 +389,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 index = mMaxVolume;
             else if (index < 0)
                 index = 0;
+
             // 变更声音
             mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
+            SPEditor.putInt(USER_VOLUME, index);
+            SPEditor.apply();
             // 变更进度条
-            ViewGroup.LayoutParams lp = valueProgressBar.getLayoutParams();
-            lp.width = findViewById(R.id.pb_setting_value).getLayoutParams().width
-                    * index / mMaxVolume;
-            valueProgressBar.setLayoutParams(lp);
+            Message msg = mHandler.obtainMessage();
+            msg.what = SET_PROGRESS_VALUE;
+            msg.obj = index;
+            mHandler.sendMessage(msg);
+
         }
 
 
@@ -356,27 +410,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
          */
 
         private void onBrightnessSlide(float percent) {
-            if (mBrightness < 0) {
-                mBrightness = getWindow().getAttributes().screenBrightness;
-                if (mBrightness <= 0.00f)
-                    mBrightness = 0.50f;
-                if (mBrightness < 0.01f)
-                    mBrightness = 0.01f;
-            }
+            mBrightness = getWindow().getAttributes().screenBrightness;
+            if (mBrightness <= 0.00f)
+                mBrightness = 0.50f;
+            if (mBrightness < 0.01f)
+                mBrightness = 0.01f;
+
             // 显示
             settingTypeIcon.setImageResource(R.mipmap.brightness);
             viceSettingLayout.setVisibility(View.VISIBLE);
+
+            int leftProgress = (int) (mBrightness * 100);
             WindowManager.LayoutParams lpa = getWindow().getAttributes();
             lpa.screenBrightness = mBrightness + percent;
             if (lpa.screenBrightness > 1.0f)
                 lpa.screenBrightness = 1.0f;
             else if (lpa.screenBrightness < 0.01f)
                 lpa.screenBrightness = 0.01f;
-            getWindow().setAttributes(lpa);
+            // 显示
+            SPEditor.putFloat(USER_BRIGHTNESS, lpa.screenBrightness);
+            SPEditor.apply();
 
-            ViewGroup.LayoutParams lp = valueProgressBar.getLayoutParams();
-            lp.width = (int) (findViewById(R.id.pb_setting_value).getLayoutParams().width * lpa.screenBrightness);
-            valueProgressBar.setLayoutParams(lp);
+            getWindow().setAttributes(lpa);
+            Message msg = mHandler.obtainMessage();
+            msg.what = SET_PROGRESS_VALUE;
+            msg.obj = (int) (leftProgress + percent * 100);
+            mHandler.sendMessage(msg);
         }
     }
 

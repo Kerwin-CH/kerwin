@@ -38,8 +38,6 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         initView();
-
-
         new Thread() {
             @Override
             public void run() {
@@ -56,6 +54,8 @@ public class SplashActivity extends BaseActivity {
             }
         }.start();
         mHandler.sendEmptyMessageDelayed(1, 4000);
+        if (!io.vov.vitamio.LibsChecker.checkVitamioLibs(this))
+            return;
     }
 
     private void initView() {

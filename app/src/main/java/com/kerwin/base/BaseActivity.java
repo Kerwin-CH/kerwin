@@ -20,7 +20,7 @@ import io.vov.vitamio.utils.Log;
 public class BaseActivity extends Activity {
     protected I_Application mApplication;
     protected SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor editor;
+    protected SharedPreferences.Editor SPEditor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +28,13 @@ public class BaseActivity extends Activity {
         PushAgent.getInstance(this).onAppStart();
         mApplication = I_Application.getInstance();
         sharedPreferences = getSharedPreferences("com.kerwin", Context.MODE_WORLD_WRITEABLE);
-        editor = sharedPreferences.edit();
+        SPEditor = sharedPreferences.edit();
         Log.d("Activity OnCreated!");
     }
 
     protected boolean putSharedString(String name, String str) {
-        editor.putString(name, str);
-        return editor.commit();
+        SPEditor.putString(name, str);
+        return SPEditor.commit();
     }
 
     @Override

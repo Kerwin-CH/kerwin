@@ -2,13 +2,55 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="horizontal">
 
-    <ListView
-        android:id="@+id/lv_channel_lsit"
+    <LinearLayout
+        android:id="@+id/ll_menu"
+        android:layout_width="50dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/background_menu"
+        android:gravity="top"
+        android:orientation="vertical"
+        android:paddingBottom="20dp"
+        android:paddingLeft="3dp"
+        android:paddingRight="3dp"
+        android:paddingTop="10dp">
+
+        <ImageView
+            android:id="@+id/iv_channel_enter"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/chanels" />
+
+        <ImageView
+            android:id="@+id/iv_collection_enter"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/collection" />
+
+        <ImageView
+            android:id="@+id/iv_setting_enter"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="5dp"
+            android:src="@mipmap/setting" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_channels_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="15dp" />
+        android:background="@drawable/background">
+
+        <ListView
+            android:id="@+id/lv_channel_lsit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="10dp"
+            android:scrollbars="none" />
+    </LinearLayout>
+
+
 </LinearLayout>
