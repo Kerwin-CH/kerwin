@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.GestureDetectorCompat;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -14,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
@@ -25,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
@@ -39,6 +42,7 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import io.realm.RealmResults;
 import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.MediaController;
@@ -65,6 +69,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private VideoView mVideoView;
     private ListView channelListView;//频道列表
     private List<Channels> channelses = new ArrayList<>();
+    private ArrayList<Channels> collectionChannels = new ArrayList<>();
     private ChannelAdapter channelAdapter;
     private MediaController mMediaController;
 
@@ -83,7 +88,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private RelativeLayout viceSettingLayout;//音量、亮度布局
     private ImageView settingTypeIcon;//音量、亮度图标控件
     private ProgressBar valueProgressBar;//音量、亮度值进度条
-
+    private ImageView collectionButton;//收藏界面入口按钮
+    private ImageView settingButton;//设置界面入口按钮
+    private ImageView channelButton;//频道界面入口按钮
     /**
      * 定时隐藏
      */
@@ -106,6 +113,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     };
+    private int scrolledX;
+    private int scrolledY;
 
 
     @Override
@@ -122,8 +131,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         getWindow().setAttributes(layoutPrarams);
         int volume = sharedPreferences.getInt(USER_VOLUME, -1);
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
-        //后去用户上次观看的频道
+        //获取用户上次观看的频道
         currentChannel = sharedPreferences.getInt(LAST_CANNEL, 0);
+        mRealm.beginTransaction();
+        RealmResults<Channels> collections = mRealm.where(Channels.class).findAll();
+        mRealm.commitTransaction();
+        collectionChannels.addAll(collections.subList(0, collections.size()));
 
 
         mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
@@ -188,19 +201,20 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Toast.makeText(MainActivity.this, "播放错误", Toast.LENGTH_SHORT).show();
+                Toast.makeText(mApplication, "播放错误！", Toast.LENGTH_SHORT).show();
                 if (channelses.size() > currentChannel - 1) {
                     currentChannel += 1;
                 } else {
                     currentChannel = 0;
                 }
-                //mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
-                // channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                // mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+                channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
-                return false;
+                return true;
             }
         });
+
     }
 
     /**
@@ -236,9 +250,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     /**
      * 缓存进度
-     *
-     * @param mp      the MediaPlayer the update pertains to
-     * @param percent the percentage (0-100) of the buffer that has been filled thus
      */
     @Override
     public void onBufferingUpdate(MediaPlayer mp, int percent) {
@@ -251,6 +262,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * @param str
      * @return
      */
+
     private String parseUrl(String str) {
         String url = new String();
         if (!str.startsWith("http")) {
@@ -269,6 +281,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         channelses = rootBean.getChannels();
         Comparator comparator = new ComparatorChannels();
         Collections.sort(channelses, comparator);
+        collectionChannels = new Gson().fromJson(sharedPreferences.getString("collectionJson", null), new TypeToken<ArrayList<Channels>>() { }.getType());
         mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
@@ -276,13 +289,46 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 弹窗显示
      */
     private void showPopipWindow() {
+        scrolledX = sharedPreferences.getInt("scrolledX", 0);
+        scrolledY = sharedPreferences.getInt("scrolledY", 0);
         popupWindow.setContentView(view);
         channelListView = (ListView) view.findViewById(R.id.lv_channel_lsit);
+        channelButton = (ImageView) view.findViewById(R.id.iv_channel_enter);
+        collectionButton = (ImageView) view.findViewById(R.id.iv_collection_enter);
+        settingButton = (ImageView) view.findViewById(R.id.iv_setting_enter);
+
+        channelButton.setOnClickListener(this);
+        collectionButton.setOnClickListener(this);
+        settingButton.setOnClickListener(this);
+
         View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
         popupWindow.showAtLocation(viewRoot, Gravity.RIGHT, 0, 0);
         channelAdapter = new ChannelAdapter();
+        channelAdapter.setData(channelses);
         channelListView.setAdapter(channelAdapter);
+        channelListView.scrollTo(scrolledX, scrolledY);
         channelListView.setOnItemClickListener(this);
+        channelListView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+                // 不滚动时保存当前滚动到的位置
+                if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
+                    if (channelses != null) {
+                        scrolledX = channelListView.getScrollX();
+                        scrolledY = channelListView.getScrollY();
+                        SPEditor.putInt("scrolledX", scrolledX);
+                        SPEditor.commit();
+                        SPEditor.putInt("scrolledY", scrolledY);
+                        SPEditor.commit();
+                        Log.e("TAG", "X:" + scrolledX + "== Y：" + scrolledY);
+                    }
+                }
+            }
+
+            @Override
+            public void onScroll(AbsListView view, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+            }
+        });
         popupWindow.setBackgroundDrawable(new BitmapDrawable());// 指定 PopupWindow 的背景
         popupWindow.setFocusable(true);
     }
@@ -301,8 +347,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
 
     @Override
-    public void onClick(View v) {
-
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.iv_channel_enter:
+                channelAdapter.setData(channelses);
+                channelAdapter.notifyDataSetChanged();
+                break;
+            case R.id.iv_collection_enter:
+                channelAdapter.setData(collectionChannels);
+                channelAdapter.notifyDataSetChanged();
+                break;
+            case R.id.iv_setting_enter:
+                break;
+        }
     }
 
 
@@ -384,12 +441,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             // 显示
             settingTypeIcon.setImageResource(R.mipmap.vice);
             viceSettingLayout.setVisibility(View.VISIBLE);
-            int index = (int) (percent * mMaxVolume) + mVolume;
+//            int index = (int) (percent * mMaxVolume / 2) + mVolume;
+            int index = (int) (percent * mMaxVolume / 3) + mVolume;
             if (index > mMaxVolume)
                 index = mMaxVolume;
             else if (index < 0)
                 index = 0;
 
+            mVolume = index;
             // 变更声音
             mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, index, 0);
             SPEditor.putInt(USER_VOLUME, index);
@@ -397,7 +456,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             // 变更进度条
             Message msg = mHandler.obtainMessage();
             msg.what = SET_PROGRESS_VALUE;
-            msg.obj = index;
+            msg.obj = index * 100 / mMaxVolume;
             mHandler.sendMessage(msg);
 
         }
@@ -460,10 +519,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     class ViewHolder {
         private TextView channelNameView;
         private ImageView channelIconView;
-        private TextView channelUrlView;
+        private ImageView collectionIconView;
     }
 
     class ChannelAdapter extends BaseAdapter {
+        private List<Channels> channelses;
+
+        private void setData(List list) {
+            this.channelses = list;
+        }
+
         @Override
         public int getCount() {
             return channelses.size();
@@ -480,22 +545,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
 
         @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
+        public View getView(final int position, View convertView, ViewGroup parent) {
             ViewHolder viewHolder;
             if (convertView == null) {
                 viewHolder = new ViewHolder();
                 convertView = LayoutInflater.from(MainActivity.this).inflate(R.layout.item_channels, null);
                 viewHolder.channelNameView = (TextView) convertView.findViewById(R.id.tv_channel_name);
                 viewHolder.channelIconView = (ImageView) convertView.findViewById(R.id.iv_channel_icon);
-                viewHolder.channelUrlView = (TextView) convertView.findViewById(R.id.tv_channel_url);
+                viewHolder.collectionIconView = (ImageView) convertView.findViewById(R.id.iv_is_collection);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
             String channelName = channelses.get(position).getName();
+            int number = Kutils.isIncloudNumerOrLetter(channelName);
+            if (channelName.length() >= 7 + number / 2)
+                channelName = channelName.substring(0, 6 + number / 2);
             viewHolder.channelNameView.setText(channelName);
-            String url = channelses.get(position).getUrl();
-            viewHolder.channelUrlView.setText(url.length() > 35 ? url.substring(0, 32) + "..." : url);
+            if (channelses.get(position).isCollecton())
+                viewHolder.collectionIconView.setImageResource(R.mipmap.collection_seleced);
+            else
+                viewHolder.collectionIconView.setImageResource(R.mipmap.collection_nomarl);
             if (channelName.contains("CCTV")) {
                 viewHolder.channelIconView.setImageResource(R.mipmap.tv_cctv_icon);
             } else if (channelName.contains("高清")) {
@@ -503,6 +573,27 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             } else {
                 viewHolder.channelIconView.setImageResource(R.mipmap.tv_normal_icon);
             }
+
+            viewHolder.collectionIconView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("Tag", "收藏");
+                    if (!channelses.get(position).isCollecton()) {
+                        channelses.get(position).setCollecton(true);
+                        collectionChannels.add(channelses.get(position));
+                        notifyDataSetChanged();
+                    } else {
+                        channelses.get(position).setCollecton(false);
+                        collectionChannels.remove(channelses.get(position));
+                        notifyDataSetChanged();
+                    }
+                    Gson gson = new Gson();
+                    String collectionJson = gson.toJson(collectionChannels);
+                    SPEditor.putString("collectionJson", collectionJson);
+                    SPEditor.apply();
+                }
+            });
+
             return convertView;
         }
     }

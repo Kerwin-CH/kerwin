@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
-import io.vov.vitamio.utils.Log;
-
 /**
  * Created by Kerwin on 2017/3/4.
  */
@@ -39,5 +37,16 @@ public class Kutils {
             e.printStackTrace();
         }
         return stringBuilder.toString().trim();
+    }
+
+    public static int isIncloudNumerOrLetter(String str) {
+        String ruler = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890-_";
+        int count = 0;
+        for (int i = 0; i < str.length(); i++) {
+            String temp = String.valueOf(str.charAt(i));
+            if (ruler.contains(new String(temp)))
+                count++;
+        }
+        return count;
     }
 }

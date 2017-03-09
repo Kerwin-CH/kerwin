@@ -8,9 +8,6 @@ import android.view.WindowManager;
 import com.umeng.message.IUmengRegisterCallback;
 import com.umeng.message.PushAgent;
 
-import io.realm.Realm;
-import io.realm.RealmConfiguration;
-
 /**
  * 作者：Kerwin   时间：2017/2/24 17:02
  * 版本：
@@ -27,8 +24,6 @@ public class I_Application extends Application {
     public void onCreate() {
         super.onCreate();
         mApplication = this;
-        RealmConfiguration configuration = new RealmConfiguration.Builder(this).name("myRealm.realm").deleteRealmIfMigrationNeeded().build();
-        Realm.setDefaultConfiguration(configuration);
         WindowManager wm = (WindowManager) this.getSystemService(Context.WINDOW_SERVICE);
 
         screenWidth = wm.getDefaultDisplay().getWidth();
@@ -50,7 +45,6 @@ public class I_Application extends Application {
             }
         });
     }
-
     public static I_Application getInstance() {
         return mApplication;
     }

@@ -1,36 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="1dp"
-    android:padding="5dp">
+    android:layout_margin="0.5dp"
+    android:descendantFocusability="blocksDescendants"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:padding="2dp">
 
     <ImageView
         android:id="@+id/iv_channel_icon"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:scaleType="fitCenter"
         android:src="@mipmap/icon" />
 
     <TextView
         android:id="@+id/tv_channel_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_toRightOf="@id/iv_channel_icon"
+        android:layout_marginLeft="3dp"
+        android:layout_weight="1"
         android:text="频道名称"
         android:textColor="@color/text_channel_name"
-        android:textSize="16sp" />
+        android:textSize="15sp" />
 
-    <TextView
-        android:id="@+id/tv_channel_url"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/iv_channel_icon"
-        android:layout_alignLeft="@id/tv_channel_name"
-        android:layout_below="@id/tv_channel_name"
-        android:layout_marginRight="10dp"
-        android:text="http://video-test-2017-03-03/01.u3m8"
-        android:textColor="@color/text_channel_url"
-        android:textSize="10sp" />
-</RelativeLayout>
+    <ImageView
+        android:id="@+id/iv_is_collection"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:clickable="true"
+        android:paddingLeft="3dp"
+        android:paddingRight="5dp"
+        android:src="@mipmap/collection_nomarl" />
+
+</LinearLayout>
