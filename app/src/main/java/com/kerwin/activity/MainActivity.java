@@ -6,7 +6,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.annotation.IdRes;
 import android.support.v4.view.GestureDetectorCompat;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.Gravity;
@@ -18,19 +20,23 @@ import android.view.WindowManager;
 import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.ProgressBar;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
+import com.kerwin.bean.ChannelsDao;
 import com.kerwin.bean.JsonsRootBean;
 import com.kerwin.utils.ComparatorChannels;
 import com.kerwin.utils.Kutils;
@@ -42,8 +48,6 @@ import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import io.realm.RealmResults;
-import io.vov.vitamio.LibsChecker;
 import io.vov.vitamio.MediaPlayer;
 import io.vov.vitamio.widget.MediaController;
 import io.vov.vitamio.widget.VideoView;
@@ -54,7 +58,7 @@ import io.vov.vitamio.widget.VideoView;
  * 说明：
  */
 
-public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener, AdapterView.OnItemClickListener, MediaPlayer.OnInfoListener, MediaPlayer.OnBufferingUpdateListener, RadioGroup.OnCheckedChangeListener {
 
     private boolean quit = false; //设置退出标识
     private final int DISMISS_COTROL_BAR = 0x001;
@@ -64,6 +68,21 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private final String USER_BRIGHTNESS = "kerwin_brightness";
     private final String USER_VOLUME = "kerwin_volume";
     private final String LAST_CANNEL = "kerwin_last_channel";
+    /**
+     * 视频缩放模式，默认为全屏
+     * VIDEO_LAYOUT_ORIGIN-画面原始大小；
+     * VIDEO_LAYOUT_SCALE-画面全屏；
+     * VIDEO_LAYOUT_STRETCH-画面拉伸；
+     * VIDEO_LAYOUT_ZOOM-画面裁剪；
+     */
+    private int videoScaleType = VideoView.VIDEO_LAYOUT_ORIGIN;
+    /**
+     * 视频清晰度  默认中画质
+     * public static final int VIDEOQUALITY_LOW = -16;
+     * public static final int VIDEOQUALITY_MEDIUM = 0;
+     * public static final int VIDEOQUALITY_HIGH = 16;
+     */
+    private int videoQualit = MediaPlayer.VIDEOQUALITY_HIGH;
 
     private PopupWindow popupWindow;
     private VideoView mVideoView;
@@ -72,6 +91,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ArrayList<Channels> collectionChannels = new ArrayList<>();
     private ChannelAdapter channelAdapter;
     private MediaController mMediaController;
+    private boolean isUpDataChannels;//是否需要更新数据库列表
+    private final int COLLECTION_LIST = 1;
+    private final int CHANNEL_LIST = 0;
+    private int menuType = CHANNEL_LIST;//当前菜单列表显示类型
 
     private int currentChannel = 0;
     private View view;
@@ -79,6 +102,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ProgressBar videoLoadProgressBar;
     private TextView videoLoadSpeedText;
     private TextView videoBufferInfo;//缓存进度
+
+    private ChannelsDao channelsDao;
 
     private AudioManager mAudioManager;
     private int mMaxVolume;//最大音量
@@ -91,6 +116,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ImageView collectionButton;//收藏界面入口按钮
     private ImageView settingButton;//设置界面入口按钮
     private ImageView channelButton;//频道界面入口按钮
+
+    private LinearLayout listLayout;//节目列表父布局（收藏和频道列表公用）
+    private RelativeLayout settingLayout;//设置界面父布局
+    private RadioGroup qualitRadioGroup;//画质选择RadioGroup
+    private RadioGroup scaleRadioGroup;//缩放模式选择RadioGroup
+    private EditText inputPath;
+    private Button playInputPath;
+    private int scrolledX;
+    private int scrolledY;
+
     /**
      * 定时隐藏
      */
@@ -113,9 +148,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             }
         }
     };
-    private int scrolledX;
-    private int scrolledY;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -131,14 +163,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         getWindow().setAttributes(layoutPrarams);
         int volume = sharedPreferences.getInt(USER_VOLUME, -1);
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
+
         //获取用户上次观看的频道
         currentChannel = sharedPreferences.getInt(LAST_CANNEL, 0);
-        mRealm.beginTransaction();
-        RealmResults<Channels> collections = mRealm.where(Channels.class).findAll();
-        mRealm.commitTransaction();
-        collectionChannels.addAll(collections.subList(0, collections.size()));
+        isUpDataChannels = sharedPreferences.getBoolean("updata", true);
 
-
+        channelsDao = mApplication.getDaoSession().getChannelsDao();
         mMaxVolume = mAudioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
         mVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         mBrightness = getWindow().getAttributes().screenBrightness;
@@ -180,7 +210,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMediaController = new MediaController(this);//实例化控制器
         mMediaController.show(5000);//控制器显示5s后自动隐藏
         mVideoView.setMediaController(mMediaController);//绑定控制器
-        mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);//设置播放画质 高画质
+        mVideoView.setVideoQuality(videoQualit);//设置播放画质 高画质
+       //mVideoView.setVideoLayout(videoScaleType, 0);
         mVideoView.requestFocus();//取得焦点
         mVideoView.setBufferSize(1024 * 1024);
         mVideoView.setOnBufferingUpdateListener(this);
@@ -192,7 +223,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
-                mp.start();
+                mVideoView.start();
                 videoLoadProgressBar.setVisibility(View.INVISIBLE);
 
             }
@@ -201,14 +232,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Toast.makeText(mApplication, "播放错误！", Toast.LENGTH_SHORT).show();
+                showToast("播放错误！");
                 if (channelses.size() > currentChannel - 1) {
                     currentChannel += 1;
                 } else {
                     currentChannel = 0;
                 }
-                // mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
-                channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                String url;
+                if (menuType == CHANNEL_LIST) {
+                    url = channelses.get(currentChannel).getUrl();
+                    channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
+                    channelsDao.delete(channelses.get(currentChannel == 0 ? 0 : currentChannel - 1));
+                } else {
+                    url = collectionChannels.get(currentChannel).getUrl();
+                }
+                mVideoView.setVideoURI(Uri.parse(parseUrl(url)));
+
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
                 return true;
@@ -276,12 +315,25 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 初始化频道信息
      */
     private void initChannels() {
-        String jsonStr = Kutils.getJson(this, "kerwin_channel.json");
-        JsonsRootBean rootBean = (JsonsRootBean) new Gson().fromJson(jsonStr, JsonsRootBean.class);
-        channelses = rootBean.getChannels();
-        Comparator comparator = new ComparatorChannels();
-        Collections.sort(channelses, comparator);
-        collectionChannels = new Gson().fromJson(sharedPreferences.getString("collectionJson", null), new TypeToken<ArrayList<Channels>>() { }.getType());
+        if (isUpDataChannels) {
+            String jsonStr = Kutils.getJson(this, "kerwin_channel.json");
+            JsonsRootBean rootBean = (JsonsRootBean) new Gson().fromJson(jsonStr, JsonsRootBean.class);
+            channelses = rootBean.getChannels();
+            Log.e("Main", "解析频道列表：" + channelses.size());
+            Comparator comparator = new ComparatorChannels();
+            Collections.sort(channelses, comparator);
+            for (Channels channels : channelses) {
+                channelsDao.insert(channels);
+            }
+            isUpDataChannels = false;
+            SPEditor.putBoolean("updata", isUpDataChannels);
+            SPEditor.commit();
+        } else {
+            channelses = channelsDao.loadAll();
+            Log.e("Main", "数据库取出频道列表：" + channelses.size());
+
+            collectionChannels = (ArrayList<Channels>) channelsDao.queryBuilder().where(ChannelsDao.Properties.Collection.eq(true)).list();
+        }
         mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
     }
 
@@ -297,11 +349,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         collectionButton = (ImageView) view.findViewById(R.id.iv_collection_enter);
         settingButton = (ImageView) view.findViewById(R.id.iv_setting_enter);
 
+        //控制显示用的父布局
+        listLayout = (LinearLayout) view.findViewById(R.id.ll_channels_list);
+        settingLayout = (RelativeLayout) view.findViewById(R.id.rl_video_setting);
+
+        qualitRadioGroup = (RadioGroup) view.findViewById(R.id.rg_qualit);
+        scaleRadioGroup = (RadioGroup) view.findViewById(R.id.rg_scalet);
+        inputPath = (EditText) view.findViewById(R.id.et_video_path);
+        playInputPath = (Button) view.findViewById(R.id.bt_play_url);
+
+        playInputPath.setOnClickListener(this);
         channelButton.setOnClickListener(this);
         collectionButton.setOnClickListener(this);
         settingButton.setOnClickListener(this);
+        qualitRadioGroup.setOnCheckedChangeListener(this);
+        scaleRadioGroup.setOnCheckedChangeListener(this);
 
-        View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main, null);
+        View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main_new, null);
         popupWindow.showAtLocation(viewRoot, Gravity.RIGHT, 0, 0);
         channelAdapter = new ChannelAdapter();
         channelAdapter.setData(channelses);
@@ -337,12 +401,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(MainActivity.this, channelses.get(position).getName(), Toast.LENGTH_LONG).show();
-        if (!LibsChecker.checkVitamioLibs(this))
-            return;
         currentChannel = position;
         SPEditor.putInt(LAST_CANNEL, position);
         SPEditor.apply();
-        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        Uri srcUri;
+        /**
+         * 区分是收藏列表点击还是频道列表点击
+         */
+        if (menuType == CHANNEL_LIST) {
+            srcUri = Uri.parse(parseUrl(channelses.get(currentChannel).getUrl()));
+        } else {
+            srcUri = Uri.parse(parseUrl(collectionChannels.get(currentChannel).getUrl()));
+        }
+        mVideoView.setVideoURI(srcUri);
     }
 
 
@@ -350,14 +421,30 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_channel_enter:
+                menuType = CHANNEL_LIST;
                 channelAdapter.setData(channelses);
                 channelAdapter.notifyDataSetChanged();
+                settingLayout.setVisibility(View.GONE);
+                listLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.iv_collection_enter:
+                menuType = COLLECTION_LIST;
                 channelAdapter.setData(collectionChannels);
                 channelAdapter.notifyDataSetChanged();
+                settingLayout.setVisibility(View.GONE);
+                listLayout.setVisibility(View.VISIBLE);
                 break;
             case R.id.iv_setting_enter:
+                settingLayout.setVisibility(View.VISIBLE);
+                listLayout.setVisibility(View.GONE);
+                break;
+            case R.id.bt_play_url:
+                String url = inputPath.getText().toString().trim();
+                if (!TextUtils.isEmpty(url)) {
+                    mVideoView.setVideoURI(Uri.parse(url));
+                } else {
+                    showToast("输入路径不能为空！");
+                }
                 break;
         }
     }
@@ -367,6 +454,36 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public boolean onTouchEvent(MotionEvent event) {
         this.mDetector.onTouchEvent(event);
         return super.onTouchEvent(event);
+    }
+
+    @Override
+    public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
+        switch (checkedId) {
+            case R.id.cb_qualit_heigh:
+                videoQualit = android.widget.VideoView.DRAWING_CACHE_QUALITY_HIGH;
+                showToast("已设置高画质");
+                break;
+            case R.id.cb_qualit_auto:
+                videoQualit = android.widget.VideoView.DRAWING_CACHE_QUALITY_AUTO;
+                showToast("已设置自动画质");
+                break;
+            case R.id.cb_qualit_low:
+                videoQualit = android.widget.VideoView.DRAWING_CACHE_QUALITY_LOW;
+                showToast("已设置低画质");
+                break;
+            case R.id.cb_scale_origin:
+                videoScaleType = VideoView.VIDEO_LAYOUT_ORIGIN;
+                showToast("已设置原始大小");
+                break;
+            case R.id.cb_scale_fullscreen:
+                videoScaleType = VideoView.VIDEO_LAYOUT_SCALE;
+                showToast("已设置等比全屏");
+                break;
+            case R.id.cb_scale_stretch:
+                videoScaleType = VideoView.VIDEO_LAYOUT_STRETCH;
+                showToast("已设置拉伸全屏");
+                break;
+        }
     }
 
 
@@ -562,7 +679,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             if (channelName.length() >= 7 + number / 2)
                 channelName = channelName.substring(0, 6 + number / 2);
             viewHolder.channelNameView.setText(channelName);
-            if (channelses.get(position).isCollecton())
+            if (channelses.get(position).getCollection())
                 viewHolder.collectionIconView.setImageResource(R.mipmap.collection_seleced);
             else
                 viewHolder.collectionIconView.setImageResource(R.mipmap.collection_nomarl);
@@ -577,23 +694,19 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             viewHolder.collectionIconView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.e("Tag", "收藏");
-                    if (!channelses.get(position).isCollecton()) {
-                        channelses.get(position).setCollecton(true);
-                        collectionChannels.add(channelses.get(position));
-                        notifyDataSetChanged();
-                    } else {
-                        channelses.get(position).setCollecton(false);
+                    if (channelses.get(position).getCollection()) {
+                        channelses.get(position).setCollection(false);
+                        channelsDao.update(channelses.get(position));
                         collectionChannels.remove(channelses.get(position));
                         notifyDataSetChanged();
+                    } else {
+                        channelses.get(position).setCollection(true);
+                        channelsDao.update(channelses.get(position));
+                        collectionChannels.add(channelses.get(position));
+                        notifyDataSetChanged();
                     }
-                    Gson gson = new Gson();
-                    String collectionJson = gson.toJson(collectionChannels);
-                    SPEditor.putString("collectionJson", collectionJson);
-                    SPEditor.apply();
                 }
             });
-
             return convertView;
         }
     }

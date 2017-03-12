@@ -1,54 +1,54 @@
 package com.kerwin.bean;
 
-import java.io.Serializable;
+import org.greenrobot.greendao.annotation.Entity;
+import org.greenrobot.greendao.annotation.Generated;
+import org.greenrobot.greendao.annotation.Id;
 
-import io.realm.RealmObject;
+import java.io.Serializable;
 
 /**
  * Created by Kerwin on 2017/3/3.
  */
-public class Channels extends RealmObject implements Serializable {
-
+@Entity
+public class Channels implements Serializable {
+    @Id
+    private Long id;
     private String url;
     private String name;
-    private String id;
-    private boolean collecton;
-
-    public boolean isCollecton() {
-        return collecton;
+    private boolean collection;
+    public boolean getCollection() {
+        return this.collection;
     }
-
-    public void setCollecton(boolean collecton) {
-        this.collecton = collecton;
+    public void setCollection(boolean collection) {
+        this.collection = collection;
     }
-
-
-    public String getId() {
-        return id;
+    public String getName() {
+        return this.name;
     }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getName() {
-        return name;
+    public String getUrl() {
+        return this.url;
     }
-
-    public void removeFromRealm() {
-
+    public void setUrl(String url) {
+        this.url = url;
     }
+    public Long getId() {
+        return this.id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    @Generated(hash = 1366561809)
+    public Channels(Long id, String url, String name, boolean collection) {
+        this.id = id;
+        this.url = url;
+        this.name = name;
+        this.collection = collection;
+    }
+    @Generated(hash = 62789264)
+    public Channels() {
+    }
+  
 }

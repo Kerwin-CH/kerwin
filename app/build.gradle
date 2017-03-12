@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
-apply plugin: 'realm-android'
+//apply plugin: 'realm-android'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 22
@@ -27,6 +28,13 @@ android {
     productFlavors {
     }
 }
+
+greendao {
+    schemaVersion 1
+    daoPackage 'com.kerwin.bean'
+    targetGenDir 'src/main/java'
+}
+
 dependencies {
     //友盟依赖
     compile 'com.umeng.analytics:analytics:latest.integration'
@@ -39,4 +47,6 @@ dependencies {
     compile project(':vitamio')
     compile 'com.android.support:support-v4:+'
     compile 'io.github.openfeign:feign-gson:9.4.0'
+    compile 'org.greenrobot:greendao:3.0.1'
+    compile 'org.greenrobot:greendao-generator:3.0.0'
 }

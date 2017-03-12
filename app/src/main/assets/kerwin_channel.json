@@ -1,5 +1,5 @@
-{
-    "channels": [
+{"state":"update",
+  "channels": [
     {
       "url": "gslbserv.itv.cmvideo.cn/HDcctv1.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8813322615956633846&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "CCTV-1综合高清"
