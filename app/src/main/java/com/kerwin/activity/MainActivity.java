@@ -123,7 +123,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private RadioGroup scaleRadioGroup;//缩放模式选择RadioGroup
     private EditText inputPath;
     private Button playInputPath;
-    private int scrolledX;
     private int scrolledY;
 
     /**
@@ -211,7 +210,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mMediaController.show(5000);//控制器显示5s后自动隐藏
         mVideoView.setMediaController(mMediaController);//绑定控制器
         mVideoView.setVideoQuality(videoQualit);//设置播放画质 高画质
-       //mVideoView.setVideoLayout(videoScaleType, 0);
+        //mVideoView.setVideoLayout(videoScaleType, 0);
         mVideoView.requestFocus();//取得焦点
         mVideoView.setBufferSize(1024 * 1024);
         mVideoView.setOnBufferingUpdateListener(this);
@@ -256,16 +255,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     }
 
-    /**
-     * 播放加载信息
-     *
-     * @param mp    the MediaPlayer the info pertains to.
-     * @param what  the type of info or warning.
-     *              <ul>
-     * @param extra an extra code, specific to the info. Typically implementation
-     *              dependant.
-     * @return
-     */
     @Override
     public boolean onInfo(MediaPlayer mp, int what, int extra) {
         switch (what) {
@@ -273,7 +262,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 if (mVideoView.isPlaying()) {
                     mVideoView.pause();
                     overVideoInfoLayout.setVisibility(View.VISIBLE);
-                    videoLoadSpeedText.setText("");
+                    videoLoadSpeedText.setText("" + extra + "kb/s" + "  ");
                 }
                 break;
             case MediaPlayer.MEDIA_INFO_BUFFERING_END:
@@ -331,7 +320,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         } else {
             channelses = channelsDao.loadAll();
             Log.e("Main", "数据库取出频道列表：" + channelses.size());
-
             collectionChannels = (ArrayList<Channels>) channelsDao.queryBuilder().where(ChannelsDao.Properties.Collection.eq(true)).list();
         }
         mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
@@ -341,7 +329,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
      * 弹窗显示
      */
     private void showPopipWindow() {
-        scrolledX = sharedPreferences.getInt("scrolledX", 0);
         scrolledY = sharedPreferences.getInt("scrolledY", 0);
         popupWindow.setContentView(view);
         channelListView = (ListView) view.findViewById(R.id.lv_channel_lsit);
@@ -364,13 +351,18 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         settingButton.setOnClickListener(this);
         qualitRadioGroup.setOnCheckedChangeListener(this);
         scaleRadioGroup.setOnCheckedChangeListener(this);
-
+        //恢复位置
+        channelListView.post(new Runnable() {
+            @Override
+            public void run() {
+                channelListView.smoothScrollBy(scrolledY, 0);
+            }
+        });
         View viewRoot = LayoutInflater.from(this).inflate(R.layout.activity_main_new, null);
         popupWindow.showAtLocation(viewRoot, Gravity.RIGHT, 0, 0);
         channelAdapter = new ChannelAdapter();
         channelAdapter.setData(channelses);
         channelListView.setAdapter(channelAdapter);
-        channelListView.scrollTo(scrolledX, scrolledY);
         channelListView.setOnItemClickListener(this);
         channelListView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
@@ -378,13 +370,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 // 不滚动时保存当前滚动到的位置
                 if (scrollState == AbsListView.OnScrollListener.SCROLL_STATE_IDLE) {
                     if (channelses != null) {
-                        scrolledX = channelListView.getScrollX();
-                        scrolledY = channelListView.getScrollY();
-                        SPEditor.putInt("scrolledX", scrolledX);
-                        SPEditor.commit();
+                        View c = channelListView.getChildAt(0);
+                        if (c != null) {
+                            int firstVisiblePosition = channelListView.getFirstVisiblePosition();
+                            int top = c.getTop();
+                            scrolledY = -top + firstVisiblePosition * c.getHeight();
+                        }
                         SPEditor.putInt("scrolledY", scrolledY);
                         SPEditor.commit();
-                        Log.e("TAG", "X:" + scrolledX + "== Y：" + scrolledY);
                     }
                 }
             }
