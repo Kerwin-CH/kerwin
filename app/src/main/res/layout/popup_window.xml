@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="220dp"
     android:layout_height="match_parent"
     android:orientation="horizontal">
 
@@ -43,7 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/background"
-        android:visibility="visible">
+        android:visibility="gone">
 
         <ListView
             android:id="@+id/lv_channel_lsit"
@@ -59,7 +59,7 @@
         android:layout_height="match_parent"
         android:background="@drawable/background"
         android:padding="5dp"
-        android:visibility="gone">
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tv_qualit"
@@ -186,6 +186,27 @@
             android:paddingRight="5dp"
             android:paddingTop="2dp"
             android:text="播放输入路径" />
+
+        <Button
+            android:id="@+id/bt_channelist_save"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/bt_play_url"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="2dp"
+            android:text="导出频道列表" />
+
+        <Button
+            android:id="@+id/bt_channelist_input"
+            android:layout_width="80dp"
+            android:layout_height="30dp"
+            android:layout_below="@id/bt_play_url"
+            android:layout_toRightOf="@id/bt_channelist_save"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:paddingTop="2dp"
+            android:text="导入频道列表" />
 
     </RelativeLayout>
 </LinearLayout>

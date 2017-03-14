@@ -1,0 +1,1907 @@
+{
+  "channels": [
+    {
+      "collection": true,
+      "id": 1,
+      "name": "CCTV-1综合高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv1.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8813322615956633846&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": true,
+      "id": 2,
+      "name": "CCTV-5体育高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv5.m3u8?authCode=07110409322147352675&stbId=003801FF001381001513BC20BA6E48D6&Contentid=4867251683694877276&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 3,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv5plus.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=7680777599813046442&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 4,
+      "name": "CCTV-1综合高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=cctv1HD_1800"
+    },
+    {
+      "collection": false,
+      "id": 5,
+      "name": "CCTV-1综合高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27748"
+    },
+    {
+      "collection": false,
+      "id": 6,
+      "name": "CCTV-1综合高清",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225699/iptv8040.smil"
+    },
+    {
+      "collection": false,
+      "id": 7,
+      "name": "CCTV-1综合高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=1e97308168dd749ef4d090c2ae9e5767"
+    },
+    {
+      "collection": false,
+      "id": 8,
+      "name": "CCTV-1综合高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=c6966860cfec6c18beaf58dae4ef3431"
+    },
+    {
+      "collection": false,
+      "id": 9,
+      "name": "CCTV-1综合高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=9d6fbe2334647848939d33d780761f9a"
+    },
+    {
+      "collection": false,
+      "id": 10,
+      "name": "CCTV-1综合高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=8f711616b78599655d39f6c3638110fa"
+    },
+    {
+      "collection": false,
+      "id": 11,
+      "name": "CCTV-1综合高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227270/10000100000000060000000001141346_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 12,
+      "name": "CCTV-2财经高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=c9389c38d48c4733b306d761e6222778"
+    },
+    {
+      "collection": false,
+      "id": 13,
+      "name": "CCTV-3综艺高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27742"
+    },
+    {
+      "collection": false,
+      "id": 14,
+      "name": "CCTV-3综艺高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=48203a0e7cfe03cfb829058153cccf5d"
+    },
+    {
+      "collection": false,
+      "id": 15,
+      "name": "CCTV-3综艺高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=017d16593d03b9dd80db38e7a5a357c4"
+    },
+    {
+      "collection": false,
+      "id": 16,
+      "name": "CCTV-5体育高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27743"
+    },
+    {
+      "collection": false,
+      "id": 17,
+      "name": "CCTV-5体育高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=611ed93967ef03ae75b443faa4274b04"
+    },
+    {
+      "collection": false,
+      "id": 18,
+      "name": "CCTV-5体育高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=38f11133c41088d07c17ed6519bc5cb9"
+    },
+    {
+      "collection": false,
+      "id": 19,
+      "name": "CCTV-5体育高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=921e896363ef376a8a16f5515441ced5"
+    },
+    {
+      "collection": false,
+      "id": 20,
+      "name": "CCTV-5体育高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=1dcb28995b25f1286319d52925faf2f2"
+    },
+    {
+      "collection": false,
+      "id": 21,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92405"
+    },
+    {
+      "collection": false,
+      "id": 22,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=d848a6dbd0b33615077cd445376e00c0"
+    },
+    {
+      "collection": false,
+      "id": 23,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=23fcbc2f6ba914a69ca87a40398d5b59"
+    },
+    {
+      "collection": false,
+      "id": 24,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=7b09e45e9e2fc452816c2b2194e44a43"
+    },
+    {
+      "collection": false,
+      "id": 25,
+      "name": "CCTV-5+体育赛事高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227192/10000100000000060000000000987131_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 26,
+      "name": "CCTV-6电影高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27746"
+    },
+    {
+      "collection": false,
+      "id": 27,
+      "name": "CCTV-6电影高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=7f6524db23a760b456f6d4d7bb47b2be"
+    },
+    {
+      "collection": false,
+      "id": 28,
+      "name": "CCTV-6电影高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=3451d88aaeac1d2f5ccbc35991761540"
+    },
+    {
+      "collection": false,
+      "id": 29,
+      "name": "CCTV-7军事农业高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=e690b018fc0ad72be721d7457cac992f"
+    },
+    {
+      "collection": false,
+      "id": 30,
+      "name": "CCTV-8电视剧高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27749"
+    },
+    {
+      "collection": false,
+      "id": 31,
+      "name": "CCTV-8电视剧高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=bd877797e7c09669e1452336fe75af23"
+    },
+    {
+      "collection": false,
+      "id": 32,
+      "name": "CCTV-8电视剧高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=a276c84ca2225a2344cb6a78de97e12d"
+    },
+    {
+      "collection": false,
+      "id": 33,
+      "name": "CCTV-9记录高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=00193ba09c6a7e0b84cb92401c12570d"
+    },
+    {
+      "collection": false,
+      "id": 34,
+      "name": "CCTV-10科教高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=b6bee3c2a184f3a79bf7a484085bf6a8"
+    },
+    {
+      "collection": false,
+      "id": 35,
+      "name": "CCTV-12社会与法高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=bc095b89ba58cc715796d3973641cf6d"
+    },
+    {
+      "collection": false,
+      "id": 36,
+      "name": "CCTV-14少儿高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=c5443a1651056d5f1c97d7e47665ebdc"
+    },
+    {
+      "collection": false,
+      "id": 37,
+      "name": "CCTV-1综合高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=cctv1HD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 38,
+      "name": "CCTV-3综艺高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=cctv3HD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 39,
+      "name": "CCTV-5体育高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=cctv5_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 40,
+      "name": "CCTV-6电影高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=cctv6HD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 41,
+      "name": "CCTV-8电视剧高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=cctv8HD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 42,
+      "name": "北京卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDbjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8848252191536870228&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 43,
+      "name": "东方卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDdfws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6690661682550849647&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 44,
+      "name": "天津卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDtjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6492213982750251972&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 45,
+      "name": "浙江卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDzjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8717793494045622160&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 46,
+      "name": "湖南卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDhnws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6837496099179515295&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 47,
+      "name": "江苏卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDjsws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=4796578844398773391&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 48,
+      "name": "深圳卫视高清",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDszws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6606401455222064705&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt"
+    },
+    {
+      "collection": false,
+      "id": 49,
+      "name": "北京卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001226/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 50,
+      "name": "东方卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001224/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 51,
+      "name": "深圳卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001230/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 52,
+      "name": "安徽卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001248/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 53,
+      "name": "山东卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001250/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 54,
+      "name": "湖北卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001252/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 55,
+      "name": "天津卫视高清",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001254/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 56,
+      "name": "浙江卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001221/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 57,
+      "name": "东方卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001223/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 58,
+      "name": "北京卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001225/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 59,
+      "name": "深圳卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001229/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 60,
+      "name": "安徽卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001247/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 61,
+      "name": "山东卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001249/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 62,
+      "name": "湖北卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001251/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 63,
+      "name": "黑龙江卫视高清",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001255/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 64,
+      "name": "CIBN热播剧场高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=2815f1b314b43b7c2b8275b718c600ef"
+    },
+    {
+      "collection": false,
+      "id": 65,
+      "name": "上海娱乐高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=4895002c908fd5e3ba4310bbc4217202"
+    },
+    {
+      "collection": false,
+      "id": 66,
+      "name": "CHC高清电影",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=18689"
+    },
+    {
+      "collection": false,
+      "id": 67,
+      "name": "CHC高清电影",
+      "url": "tv.microsoft.sd.cn/bjtv.m3u8?id=CHCHD_1200"
+    },
+    {
+      "collection": false,
+      "id": 68,
+      "name": "CHC高清电影",
+      "url": "tv.microsoft.sd.cn/bjtv.m3u8?id=CHCHD_6000"
+    },
+    {
+      "collection": false,
+      "id": 69,
+      "name": "北京卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27747"
+    },
+    {
+      "collection": false,
+      "id": 70,
+      "name": "北京卫视高清",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225546/iptv51912.smil"
+    },
+    {
+      "collection": false,
+      "id": 71,
+      "name": "北京卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=a02b79aa70c295031e8625cc87ff65de"
+    },
+    {
+      "collection": false,
+      "id": 72,
+      "name": "北京卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=9f39748e1fd57e1438b9bc9dd960df03"
+    },
+    {
+      "collection": false,
+      "id": 73,
+      "name": "北京卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=6076bc3c507369b219069ab8d2ffd129"
+    },
+    {
+      "collection": false,
+      "id": 74,
+      "name": "北京卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=2dc8b0a1e6503354589f89ec14406720"
+    },
+    {
+      "collection": false,
+      "id": 75,
+      "name": "北京卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227018/10000100000000060000000000698843_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 76,
+      "name": "北京纪实高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=bjjsHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 77,
+      "name": "北京纪实高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92435"
+    },
+    {
+      "collection": false,
+      "id": 78,
+      "name": "北京纪实高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=5ad6781152f2e3e8fc909ab9251a7a73"
+    },
+    {
+      "collection": false,
+      "id": 79,
+      "name": "北京文艺高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=bjwyHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 80,
+      "name": "北京文艺高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=31378"
+    },
+    {
+      "collection": false,
+      "id": 81,
+      "name": "北京文艺高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=b7cd0aae6b02fd6acc73d65f047146da"
+    },
+    {
+      "collection": false,
+      "id": 82,
+      "name": "北京体育高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=88539"
+    },
+    {
+      "collection": false,
+      "id": 83,
+      "name": "北京体育高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=2757d08955f5a183889634fbd8ec9dbf"
+    },
+    {
+      "collection": false,
+      "id": 84,
+      "name": "河北卫视高清",
+      "url": "weblive.hebtv.com/live/hbws_bq/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 85,
+      "name": "东方卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/DFWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 86,
+      "name": "东方卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=dongfangHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 87,
+      "name": "东方卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=b02ad9f399c57ca4f1334b230607e9a5"
+    },
+    {
+      "collection": false,
+      "id": 88,
+      "name": "东方卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=2101644980a50aa1f2a12c3f4e5efe44"
+    },
+    {
+      "collection": false,
+      "id": 89,
+      "name": "东方卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=90b69dbe187f7bf293cc6c4adb6a1768"
+    },
+    {
+      "collection": false,
+      "id": 90,
+      "name": "东方卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227299/10000100000000060000000001141344_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 91,
+      "name": "上海纪实高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=96120"
+    },
+    {
+      "collection": false,
+      "id": 92,
+      "name": "上海纪实高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=e53719d6ac918e6cd171128bb323df0d"
+    },
+    {
+      "collection": false,
+      "id": 93,
+      "name": "上海纪实高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=de389b6f6de3653245d7407b3514b451"
+    },
+    {
+      "collection": false,
+      "id": 94,
+      "name": "上海电视剧高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=6362e23344d406c05082d60b21fe2d31"
+    },
+    {
+      "collection": false,
+      "id": 95,
+      "name": "上海新闻综合高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=563fe901a3b8dc2c0d1aaec087b1a0f4"
+    },
+    {
+      "collection": false,
+      "id": 96,
+      "name": "上海五星体育高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=e2136d0682ac3b8e4f4a5295d8d393cd"
+    },
+    {
+      "collection": false,
+      "id": 97,
+      "name": "上海第1财经高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=61dbaa046f01d5768b21abbee3938289"
+    },
+    {
+      "collection": false,
+      "id": 98,
+      "name": "天津卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=tianjinHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 99,
+      "name": "天津卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92430"
+    },
+    {
+      "collection": false,
+      "id": 100,
+      "name": "天津卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=5c88bc88ecf5fc54b7a8094568a8da2a"
+    },
+    {
+      "collection": false,
+      "id": 101,
+      "name": "天津卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=84c1cd7418b49ff99a5e9e3bf0110366"
+    },
+    {
+      "collection": false,
+      "id": 102,
+      "name": "天津卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=cb839a36b976b22dde4f40d642b3ae6c"
+    },
+    {
+      "collection": false,
+      "id": 103,
+      "name": "湖北卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=hubeiHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 104,
+      "name": "湖北卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92427"
+    },
+    {
+      "collection": false,
+      "id": 105,
+      "name": "湖北卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=34fde54b067c70c47db457bdd871838b"
+    },
+    {
+      "collection": false,
+      "id": 106,
+      "name": "湖北卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=13e816eeed395b0e5de6926b3adafe95"
+    },
+    {
+      "collection": false,
+      "id": 107,
+      "name": "湖北卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=794ec216254104a85d58782d2abf0fb5"
+    },
+    {
+      "collection": false,
+      "id": 108,
+      "name": "湖南卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27745"
+    },
+    {
+      "collection": false,
+      "id": 109,
+      "name": "湖南卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/HNWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 110,
+      "name": "湖南卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=ws_hunanwsHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 111,
+      "name": "湖南卫视高清",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225697/iptv8039.smil"
+    },
+    {
+      "collection": false,
+      "id": 112,
+      "name": "湖南卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=1d8417c02cbc559a970cb3b39f8b01b9"
+    },
+    {
+      "collection": false,
+      "id": 113,
+      "name": "湖南卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=0ae681272121c52879514e395db6fd81"
+    },
+    {
+      "collection": false,
+      "id": 114,
+      "name": "湖南卫视高清",
+      "url": "fms.yyrtv.com:82/hls-live/livepkgr/_definst_/liveevent/hunanweishi.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 115,
+      "name": "湖南金鹰纪实高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=96118"
+    },
+    {
+      "collection": false,
+      "id": 116,
+      "name": "湖南金鹰纪实高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=e209b67b49d73a02772c62d54c87234d"
+    },
+    {
+      "collection": false,
+      "id": 117,
+      "name": "湖南经视高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=hnjs"
+    },
+    {
+      "collection": false,
+      "id": 118,
+      "name": "湖南都市高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=hnds"
+    },
+    {
+      "collection": false,
+      "id": 119,
+      "name": "湖南娱乐高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=hnyl"
+    },
+    {
+      "collection": false,
+      "id": 120,
+      "name": "湖南电视剧高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=hndsj"
+    },
+    {
+      "collection": false,
+      "id": 121,
+      "name": "湖南国际频道高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=hngj"
+    },
+    {
+      "collection": false,
+      "id": 122,
+      "name": "湖南金鹰纪实高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=jyjs"
+    },
+    {
+      "collection": false,
+      "id": 123,
+      "name": "湖南金鹰卡通高清",
+      "url": "my.fmiptv.cc/fmvlive/mg_hntv.php?id=jykt"
+    },
+    {
+      "collection": false,
+      "id": 124,
+      "name": "浙江卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27750"
+    },
+    {
+      "collection": false,
+      "id": 125,
+      "name": "浙江卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/ZJWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 126,
+      "name": "浙江卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=96113a704f71e359b9492fd5b14ac401"
+    },
+    {
+      "collection": false,
+      "id": 127,
+      "name": "浙江卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=8bcb0bfafd1318548ae2281982bfd1e6"
+    },
+    {
+      "collection": false,
+      "id": 128,
+      "name": "浙江卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=18e6bdc9122591c73b0c85bd33c8d0e7"
+    },
+    {
+      "collection": false,
+      "id": 129,
+      "name": "浙江卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227296/10000100000000060000000001141335_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 130,
+      "name": "安徽卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=9b3da44dd0d3f15e503a31eb97deed26"
+    },
+    {
+      "collection": false,
+      "id": 131,
+      "name": "江西卫视高清",
+      "url": "live02.jxtvcn.com.cn/a2451f3fd022438eb3bc38c3ffbfd57d/h264_700k_ts/index.m3u8?type=hls_live_redirect"
+    },
+    {
+      "collection": false,
+      "id": 132,
+      "name": "江苏卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=jiangsuHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 133,
+      "name": "江苏卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=27744"
+    },
+    {
+      "collection": false,
+      "id": 134,
+      "name": "江苏卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=1f4a289fa1b0115518091ba253426add"
+    },
+    {
+      "collection": false,
+      "id": 135,
+      "name": "江苏卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=b4a5df0663043b5fd509ea01fe43be64"
+    },
+    {
+      "collection": false,
+      "id": 136,
+      "name": "江苏卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=a876a49760ac3fccb3931d92c06329a7"
+    },
+    {
+      "collection": false,
+      "id": 137,
+      "name": "江苏卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=8b936e42ea09ee3df3d1f6a799c97524"
+    },
+    {
+      "collection": false,
+      "id": 138,
+      "name": "江苏卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227027/10000100000000060000000000698853_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 139,
+      "name": "山东卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=shandong"
+    },
+    {
+      "collection": false,
+      "id": 140,
+      "name": "山东卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92426"
+    },
+    {
+      "collection": false,
+      "id": 141,
+      "name": "山东卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=6fe58002ca9e960b46cdf65c4a7f093b"
+    },
+    {
+      "collection": false,
+      "id": 142,
+      "name": "山东卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=c4166d430a718ebb0f7d95ab8e2c67f1"
+    },
+    {
+      "collection": false,
+      "id": 143,
+      "name": "山东卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=dc7752bf3ed986947ff2da6e3d2fcabd"
+    },
+    {
+      "collection": false,
+      "id": 144,
+      "name": "山东高清剧场",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=shandongHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 145,
+      "name": "广西卫视高清",
+      "url": "222.216.111.82:8088/ts000"
+    },
+    {
+      "collection": false,
+      "id": 146,
+      "name": "广东卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92428"
+    },
+    {
+      "collection": false,
+      "id": 147,
+      "name": "广东卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/GDWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 148,
+      "name": "广东卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=guangdongHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 149,
+      "name": "广东卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=b44837ccc19ca88f7b2210526eb4b854"
+    },
+    {
+      "collection": false,
+      "id": 150,
+      "name": "广东卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=8f2f425647c4c601814671efbba75ff0"
+    },
+    {
+      "collection": false,
+      "id": 151,
+      "name": "广东卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=831be0ae6aa81ae1d2d22b5699c77715"
+    },
+    {
+      "collection": false,
+      "id": 152,
+      "name": "广东卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=4e12d1d22694588a07952bf1e4ccb8f8"
+    },
+    {
+      "collection": false,
+      "id": 153,
+      "name": "广东卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227218/10000100000000060000000000988525_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 154,
+      "name": "广东体育高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227484/10000100000000060000000003928833_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 155,
+      "name": "深圳卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92431"
+    },
+    {
+      "collection": false,
+      "id": 156,
+      "name": "深圳卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/SZWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 157,
+      "name": "深圳卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=shenzhenHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 158,
+      "name": "深圳卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=d488f609b67c2b8b1487e4ce67cbd7d4"
+    },
+    {
+      "collection": false,
+      "id": 159,
+      "name": "深圳卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=ce73a98c3003f0306937c2047a2ab212"
+    },
+    {
+      "collection": false,
+      "id": 160,
+      "name": "深圳卫视高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=0b9207db3aef018defaa125304fda27c"
+    },
+    {
+      "collection": false,
+      "id": 161,
+      "name": "深圳卫视高清",
+      "url": "183.59.185.72:30001/PLTV/88888905/224/3221227267/10000100000000060000000001141334_0.smil"
+    },
+    {
+      "collection": false,
+      "id": 162,
+      "name": "辽宁卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=31f20f74f4c135bc12688ed668941ad7"
+    },
+    {
+      "collection": false,
+      "id": 163,
+      "name": "黑龙江卫视高清",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=92429"
+    },
+    {
+      "collection": false,
+      "id": 164,
+      "name": "黑龙江卫视高清",
+      "url": "122.96.52.11:8080/gitv_live/HLJWS-HD/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 165,
+      "name": "黑龙江卫视高清",
+      "url": "le.iptv.ac.cn:8888/letv.m3u8?id=heilongjiangHD_1800"
+    },
+    {
+      "collection": false,
+      "id": 166,
+      "name": "黑龙江卫视高清",
+      "url": "my.fmiptv.cc/fvlive/hd_catv.php?id=ced6354a5837157b94373890966a9222"
+    },
+    {
+      "collection": false,
+      "id": 167,
+      "name": "黑龙卫视江高清",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=02c06b6c79aab69fd969b73680feb26e"
+    },
+    {
+      "collection": false,
+      "id": 168,
+      "name": "黑龙卫视江高清",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=95fb22d1c7a7bc7879add5178a4e62c8"
+    },
+    {
+      "collection": false,
+      "id": 169,
+      "name": "黑龙江卫视高清",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=e8399621de4b912876b93650aaff4835"
+    },
+    {
+      "collection": false,
+      "id": 170,
+      "name": "海峡卫视高清",
+      "url": "iptv.ac.cn/fjtv.m3u8?id=3"
+    },
+    {
+      "collection": false,
+      "id": 171,
+      "name": "东南卫视高清",
+      "url": "iptv.ac.cn/fjtv.m3u8?id=5"
+    },
+    {
+      "collection": false,
+      "id": 172,
+      "name": "东南卫视高清",
+      "url": "my.fmiptv.cc/fvlive/fjtv.php?id=fjdnws"
+    },
+    {
+      "collection": false,
+      "id": 173,
+      "name": "眉山高清",
+      "url": "stream.mstv.cc/gqpd/sd/live.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 174,
+      "name": "北京卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=bjwsHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 175,
+      "name": "北京纪实高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=bjjsHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 176,
+      "name": "北京文艺高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=bjwyHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 177,
+      "name": "北京体育高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=btv6_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 178,
+      "name": "东方卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=dongfangHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 179,
+      "name": "天津卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=tianjinHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 180,
+      "name": "浙江卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=zhejiangHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 181,
+      "name": "湖北卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=hubeiHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 182,
+      "name": "湖南卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=ws_hunanwsHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 183,
+      "name": "山东卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=shandongHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 184,
+      "name": "江苏卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=jiangsuHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 185,
+      "name": "深圳卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=shenzhenHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 186,
+      "name": "广东卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=guangdongHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 187,
+      "name": "黑龙江卫视高清",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=heilongjiangHD_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 188,
+      "name": "好莱坞高清影院",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hlw_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 189,
+      "name": "热门高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_rmmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 190,
+      "name": "恐怖高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_meiju_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 191,
+      "name": "跟播高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_gbmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 192,
+      "name": "经典高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_jdmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 193,
+      "name": "科幻高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_khmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 194,
+      "name": "奇幻高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_qhmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 195,
+      "name": "喜剧高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_xjmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 196,
+      "name": "单元高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_dymj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 197,
+      "name": "肥皂高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_fzmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 198,
+      "name": "虐恋高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_nlmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 199,
+      "name": "高冷高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_glmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 200,
+      "name": "小众高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_xzmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 201,
+      "name": "罪案烧脑高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_zasn_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 202,
+      "name": "超级英雄高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_cjyx_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 203,
+      "name": "律政医务高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lzywmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 204,
+      "name": "热血动作高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_rxdzmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 205,
+      "name": "青春偶像高清美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_qcoxmj_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 206,
+      "name": "高清剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_test_forPublicFree1_3000&tag=live&ext=m3u8&ext=m3u8&platid=10&splatid"
+    },
+    {
+      "collection": false,
+      "id": 207,
+      "name": "CCTV-1",
+      "url": "http: //cctv1.vtime.cntv.dnion.com:8000/live/no/011_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 209,
+      "name": "CCTV-3",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/206_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 211,
+      "name": "CCTV-4美洲",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/001_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 213,
+      "name": "CCTV-5",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/211_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 215,
+      "name": "CCTV-6",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/216_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 217,
+      "name": "CCTV-8",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/226_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 219,
+      "name": "CCTV-10",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/231_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 221,
+      "name": "CCTV-12",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/241_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 223,
+      "name": "CCTV-14",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/246_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 225,
+      "name": "MTV音乐",
+      "url": "222.191.24.6:6610/2/2/ch00000090990000001155/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 227,
+      "name": "TVB翡翠",
+      "url": "wddddd.08tk.cn/11234.php"
+    },
+    {
+      "collection": false,
+      "id": 229,
+      "name": "CIBN电影",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=ff7333c4f4afd05e609f3e9b358cd45e"
+    },
+    {
+      "collection": false,
+      "id": 231,
+      "name": "CIBN骄阳剧场",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=e56aed7bb5ac16fc6531ea0d927717b5"
+    },
+    {
+      "collection": false,
+      "id": 233,
+      "name": "CIBN综艺",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=0e931c706cc693074b88221039975909"
+    },
+    {
+      "collection": false,
+      "id": 235,
+      "name": "CIBN动漫",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=ae19b8573b2aba4a62c3f2cb6ca33d7c"
+    },
+    {
+      "collection": false,
+      "id": 237,
+      "name": "CIBN微电影",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=77241905befa04ed061f455e6756cc82"
+    },
+    {
+      "collection": false,
+      "id": 239,
+      "name": "CIBN电影导视",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=70101fd7dfdb56e1ed67e16899e53031"
+    },
+    {
+      "collection": false,
+      "id": 241,
+      "name": "爱奇艺惊悚午夜场",
+      "url": "106.120.175.81:55336/tslive/c1_lb_jingnawuyechang_720p_t10/c1_lb_jingnawuyechang_720p_t10.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 243,
+      "name": "都市剧场",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=44204"
+    },
+    {
+      "collection": false,
+      "id": 246,
+      "name": "都市剧场",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=b98f0e61e83d4d886b1ef583ec1fd9fd"
+    },
+    {
+      "collection": false,
+      "id": 248,
+      "name": "欢笑剧场",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225595/iptv7988.smil"
+    },
+    {
+      "collection": false,
+      "id": 250,
+      "name": "欢笑剧场",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=96e32af56a2a4773d7e223fbfc6480dd"
+    },
+    {
+      "collection": false,
+      "id": 252,
+      "name": "魅力音乐",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225611/iptv7996.smil"
+    },
+    {
+      "collection": false,
+      "id": 254,
+      "name": "魅力音乐",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=6f57503220b783984c75ebff7fb5a594"
+    },
+    {
+      "collection": false,
+      "id": 256,
+      "name": "动漫秀场",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=ecec250a1341fdf28c91873dc276de60"
+    },
+    {
+      "collection": false,
+      "id": 258,
+      "name": "全纪实",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=98901"
+    },
+    {
+      "collection": false,
+      "id": 260,
+      "name": "全纪实",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=c5e42c2b1b714477c7a49a6e41e44c30"
+    },
+    {
+      "collection": false,
+      "id": 262,
+      "name": "劲爆体育",
+      "url": "rtsp://115.153.254.75/PLTV/88888888/224/3221225597/iptv7989.smil"
+    },
+    {
+      "collection": false,
+      "id": 264,
+      "name": "劲爆体育",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=ebe71f5bff5a9ba311f3c112dc71d28e"
+    },
+    {
+      "collection": false,
+      "id": 266,
+      "name": "游戏风云",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=d2d9dd0e3ff2e1be46f87417fb3fc540"
+    },
+    {
+      "collection": false,
+      "id": 268,
+      "name": "幸福彩",
+      "url": "my.fmiptv.cc/fmvlive/tvm_cibn.php?id=185b533839b47e2aa01e95f98d1027a1"
+    },
+    {
+      "collection": false,
+      "id": 270,
+      "name": "3D试验频道",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=1ad624eefff7602d344b94bb74021091"
+    },
+    {
+      "collection": false,
+      "id": 273,
+      "name": "京视剧场",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=d2655b4fbcf722b3b94d28884b67ccf5"
+    },
+    {
+      "collection": false,
+      "id": 275,
+      "name": "凤凰卫视中文",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=2e7b0cade5ee3ba5d5c0140c15d89f80"
+    },
+    {
+      "collection": false,
+      "id": 277,
+      "name": "凤凰卫视资讯",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=bd747d0d316f1287a9ce58cdead7718a"
+    },
+    {
+      "collection": false,
+      "id": 280,
+      "name": "MTV音乐",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001155/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 282,
+      "name": "HOT精品剧场",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001227/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 284,
+      "name": "HOT风尚音乐",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001257/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 286,
+      "name": "经典大片",
+      "url": "222.191.24.43:6610/001/2/ch00000090990000001167/index.m3u8?ispcode=3"
+    },
+    {
+      "collection": false,
+      "id": 288,
+      "name": "CHC家庭影院",
+      "url": "my.fmiptv.cc/fvlive/suntv_tts.php?id=1a2e5dfb7253100bfe0813554939ec9e"
+    },
+    {
+      "collection": false,
+      "id": 290,
+      "name": "CHC动作电影",
+      "url": "host036.gotoip2.com/Cainiao/gehua.php?id=44197"
+    },
+    {
+      "collection": false,
+      "id": 292,
+      "name": "CHC动作电影",
+      "url": "my.fmiptv.cc/fmvlive/gehua_live.php?id=128cce399397f6b0f0734d7db2e9596b"
+    },
+    {
+      "collection": false,
+      "id": 294,
+      "name": "德阳公共HD",
+      "url": "scdytv.com:1935/live/ggpd_livevideo/palylist.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 296,
+      "name": "中天亚洲",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=pay_cti_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 298,
+      "name": "科幻电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_us_scifi_3000&tag=live&ext=m3u8&ext=m3u8&platid=10&splatid"
+    },
+    {
+      "collection": false,
+      "id": 300,
+      "name": "乐视成人2",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_adult2_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 302,
+      "name": "Thrill360惊悚电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_Thrill_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 304,
+      "name": "HITS美剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=pay_hits_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 306,
+      "name": "RTL&CBS-ENTERTAINMENT综艺HD",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=pay_cbs_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 308,
+      "name": "汉天卫视",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_us_CES_dianshiju_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 310,
+      "name": "梦工厂国语",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_dreamworksMAN_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 312,
+      "name": "梦工厂英语",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_dreamworksENG_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid=1015&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 314,
+      "name": "乐视电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lsdyt_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 316,
+      "name": "欧美电影2",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_movies3_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 318,
+      "name": "乐视动漫",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lsdm_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 320,
+      "name": "韩剧社区",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_KRdrama_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 322,
+      "name": "乐视韩剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_koreatv_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 325,
+      "name": "4K电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_4Kmovie_8000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 327,
+      "name": "乐视1080P电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_1080P_1080p3m&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 329,
+      "name": "4K纪录片",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_4Kdocumentary_8000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 331,
+      "name": "香港鬼片",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_hkghost_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 333,
+      "name": "香港传奇电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_Hkromance_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 335,
+      "name": "香港喜剧电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_Hkcomedies_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 337,
+      "name": "港产片",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lsgcp_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 339,
+      "name": "邓紫棋",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_dengziqi_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 341,
+      "name": "周笔畅",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_zbc_8000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 343,
+      "name": "四大天王",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_fourkings_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 345,
+      "name": "周星驰",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_stephenchow_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 347,
+      "name": "乐视娱乐新闻",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_LeEnt_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 349,
+      "name": "乐视亲子",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_parenting_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 351,
+      "name": "时尚美食",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_style_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 353,
+      "name": "LIVE生活",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lslivesh_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 355,
+      "name": "乐视MV",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_mv_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 357,
+      "name": "音乐女团SNH48",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_SNH48_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 359,
+      "name": "音乐女团AKB48",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_AKB48_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 361,
+      "name": "音乐韩团SMTOWN",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_SMTOWN_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 363,
+      "name": "欧美流行音乐",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_omlx_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 365,
+      "name": "粤语音乐",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_yyyy_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 367,
+      "name": "港台男歌手",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_gangtainangeshou_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 369,
+      "name": "华语独立音乐",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hydlyy_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 371,
+      "name": "乐视自制剧",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_make_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 373,
+      "name": "名侦探柯南",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_mztkn_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 375,
+      "name": "乐视动漫",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_comic_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 377,
+      "name": "乐视香港电影",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hkmovie_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 379,
+      "name": "郭德纲",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_gdg_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 381,
+      "name": "励志剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lzjc_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 383,
+      "name": "女性剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_nxjc_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 385,
+      "name": "兄弟剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_xdjc_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 387,
+      "name": "宫斗剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_gdjc_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 389,
+      "name": "姐妹淘剧场",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_jmtjc_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 391,
+      "name": "独播动漫",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_zcyyzb4_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 393,
+      "name": "英超联赛",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lb_yingchao_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 395,
+      "name": "德甲联赛",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lb_dejia_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 397,
+      "name": "亚洲足球",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_yzzq_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 399,
+      "name": "乐视英超",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lb_yingchao_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 401,
+      "name": "乐视网球",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_CSL8_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 403,
+      "name": "乐视足球赛",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_FA_Cup_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 405,
+      "name": "乐视体育英超3",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=hk_yanboshi3_5000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 407,
+      "name": "乐视体育",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_lesports_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 409,
+      "name": "高尔夫美巡赛",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_gefmxs_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 411,
+      "name": "乐视高尔夫",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_golf_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 413,
+      "name": "德甲",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lb_dejia_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 415,
+      "name": "意甲",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_lb_yijia_1800&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 417,
+      "name": "乐视足球",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_zuqiu_720p&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 419,
+      "name": "欧洲足球",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_ozzq_3000&tag=live&ext=m3u8&sign=live_tv&platid=10&splatid&format=letv&expect=1"
+    },
+    {
+      "collection": false,
+      "id": 421,
+      "name": "CGTN",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/046_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 423,
+      "name": "CGTN法语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/026_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 425,
+      "name": "CGTN阿拉伯语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/031_/seg0/index.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 427,
+      "name": "凤凰中文",
+      "url": "http://zv.3gv.ifeng.com/live/zhongwen800k.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 429,
+      "name": "凤凰香港",
+      "url": "http://zv.3gv.ifeng.com/live/hongkong800k.m3u8"
+    },
+    {
+      "collection": false,
+      "id": 430,
+      "name": "美国NBA篮球",
+      "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_PL24_5000&tag=live&ext=m3u8&ext=m3u8&platid=10&splatid"
+    }
+  ],
+  "state": "updata"
+}

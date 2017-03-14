@@ -1,8 +1,13 @@
 package com.kerwin.utils;
 
 import android.content.Context;
+import android.os.Environment;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -48,5 +53,61 @@ public class Kutils {
                 count++;
         }
         return count;
+    }
+
+    /**
+     * 写字符串到本地
+     *
+     * @param msg
+     */
+    public static void putStringToSD(String msg, String path) {
+        FileWriter filerWriter = null;
+        BufferedWriter bufWriter = null;
+        if (path == null || "".equals(path)) {
+            path = "/mnt/sdcard";
+            if (Environment.isExternalStorageEmulated()) {
+                path = Environment.getExternalStorageDirectory().getAbsolutePath();
+            }
+        }
+        String filePath = path + "/kk_channles.json";
+
+        File f = new File(filePath);
+        if (!f.getParentFile().exists()) {
+            f.getParentFile().mkdirs();
+        }
+        try {
+            filerWriter = new FileWriter(filePath, true);
+            bufWriter = new BufferedWriter(filerWriter);
+            bufWriter.write(msg);
+            bufWriter.newLine();
+            bufWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (bufWriter != null)
+                    bufWriter.close();
+                if (filerWriter != null)
+                    filerWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static String getStringFromSD(String path) {
+        String result = "";
+        try {
+            FileInputStream f = new FileInputStream(path);
+            BufferedReader bis = new BufferedReader(new InputStreamReader(f));
+            String line = "";
+            while ((line = bis.readLine()) != null) {
+                result += line;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+
     }
 }

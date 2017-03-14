@@ -1,43 +1,44 @@
-{"state":"update",
+{
+  "state": "update",
   "channels": [
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDcctv1.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8813322615956633846&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv1.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8813322615956633846&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "CCTV-1综合高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDcctv5.m3u8?authCode=07110409322147352675&stbId=003801FF001381001513BC20BA6E48D6&Contentid=4867251683694877276&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv5.m3u8?authCode=07110409322147352675&stbId=003801FF001381001513BC20BA6E48D6&Contentid=4867251683694877276&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "CCTV-5体育高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDcctv5plus.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=7680777599813046442&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDcctv5plus.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=7680777599813046442&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "CCTV-5+体育赛事高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDbjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8848252191536870228&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDbjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8848252191536870228&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "北京卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDdfws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6690661682550849647&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDdfws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6690661682550849647&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "东方卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDtjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6492213982750251972&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDtjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6492213982750251972&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "天津卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDzjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8717793494045622160&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDzjws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=8717793494045622160&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "浙江卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDhnws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6837496099179515295&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDhnws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6837496099179515295&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "湖南卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDjsws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=4796578844398773391&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDjsws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=4796578844398773391&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "江苏卫视高清"
     },
     {
-      "url": "gslbserv.itv.cmvideo.cn/HDszws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6606401455222064705&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
+      "url": "http://gslbserv.itv.cmvideo.cn/HDszws.m3u8?authCode=07110409322147352675&stbId=006001FF0018120000060019F0D496A1&Contentid=6606401455222064705&mos=jbjhhzstsl&livemode=1&channel-id=wasusyt",
       "name": "深圳卫视高清"
     },
     {
@@ -1607,6 +1608,114 @@
     {
       "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_NBA2_5000&tag=live&ext=m3u8&ext=m3u8&platid=10&splatid",
       "name": "美国NBA篮球"
+    },
+    {
+      "name": "CCTV-1",
+      "url": "http: //cctv1.vtime.cntv.dnion.com:8000/live/no/011_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-2",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/201_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-3",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/206_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-4亚洲",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/016_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-4美洲",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/001_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-4欧洲",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/006_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-5",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/211_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-5+",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/256_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-6",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/216_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-7",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/221_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-8",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/226_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-9",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/291_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-10",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/231_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-11",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/236_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-12",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/241_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-13",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/021_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-14",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/246_/seg0/index.m3u8"
+    },
+    {
+      "name": "CCTV-15",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/251_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/046_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN记录",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/296_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN法语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/026_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN俄语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/036_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN阿拉伯语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/031_/seg0/index.m3u8"
+    },
+    {
+      "name": "CGTN西班牙语",
+      "url": "http://cctv1.vtime.cntv.dnion.com:8000/live/no/041_/seg0/index.m3u8"
+    },
+    {
+      "name": "凤凰中文",
+      "url": "http://zv.3gv.ifeng.com/live/zhongwen800k.m3u8"
+    },
+    {
+      "name": "凤凰资讯",
+      "url": "http://zv.3gv.ifeng.com/live/zixun800k.m3u8"
+    },
+    {
+      "name": "凤凰香港",
+      "url": "http://zv.3gv.ifeng.com/live/hongkong800k.m3u8"
     },
     {
       "url": "live.g3proxy.lecloud.com/gslb?stream_id=lb_hk_PL24_5000&tag=live&ext=m3u8&ext=m3u8&platid=10&splatid",

@@ -2,5 +2,9 @@
     {
         "merged": "D:\\WorkSpace\\Kerwin\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\libarm.so",
         "source": "D:\\WorkSpace\\Kerwin\\vitamio\\build\\intermediates\\bundles\\debug\\res\\raw\\libarm.so"
+    },
+    {
+        "merged": "D:\\StudioWorkSpace\\Kerwin\\vitamio\\build\\intermediates\\res\\merged\\androidTest\\debug\\raw\\libarm.so",
+        "source": "D:\\StudioWorkSpace\\Kerwin\\vitamio\\build\\intermediates\\bundles\\debug\\res\\raw\\libarm.so"
     }
 ]

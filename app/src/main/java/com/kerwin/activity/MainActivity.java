@@ -33,12 +33,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kerwin.R;
 import com.kerwin.base.BaseActivity;
 import com.kerwin.bean.Channels;
 import com.kerwin.bean.ChannelsDao;
 import com.kerwin.bean.JsonsRootBean;
 import com.kerwin.utils.ComparatorChannels;
+import com.kerwin.utils.DisplayUtil;
 import com.kerwin.utils.Kutils;
 
 import java.util.ArrayList;
@@ -67,7 +69,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     private final String USER_BRIGHTNESS = "kerwin_brightness";
     private final String USER_VOLUME = "kerwin_volume";
-    private final String LAST_CANNEL = "kerwin_last_channel";
+    private final String LAST_CHANNEL = "kerwin_last_channel";
     /**
      * 视频缩放模式，默认为全屏
      * VIDEO_LAYOUT_ORIGIN-画面原始大小；
@@ -102,6 +104,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private ProgressBar videoLoadProgressBar;
     private TextView videoLoadSpeedText;
     private TextView videoBufferInfo;//缓存进度
+    private Button saveChannelList;//保存频道信息到本地
+    private Button inputchannelList;//导入本地频道信息
+
 
     private ChannelsDao channelsDao;
 
@@ -148,6 +153,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
     };
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,7 +170,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mAudioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, 0);
 
         //获取用户上次观看的频道
-        currentChannel = sharedPreferences.getInt(LAST_CANNEL, 0);
+        currentChannel = sharedPreferences.getInt(LAST_CHANNEL, 0);
         isUpDataChannels = sharedPreferences.getBoolean("updata", true);
 
         channelsDao = mApplication.getDaoSession().getChannelsDao();
@@ -216,7 +222,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         mVideoView.setOnBufferingUpdateListener(this);
 
         view = LayoutInflater.from(this).inflate(com.kerwin.R.layout.popup_window, null);
-        popupWindow = new PopupWindow(view, 650, ViewGroup.LayoutParams.MATCH_PARENT, true);
+        popupWindow = new PopupWindow(view, DisplayUtil.dip2px(this, 220), ViewGroup.LayoutParams.MATCH_PARENT, true);
 
 
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
@@ -232,21 +238,23 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 showToast("播放错误！");
-                if (channelses.size() > currentChannel - 1) {
-                    currentChannel += 1;
-                } else {
-                    currentChannel = 0;
+//                if (channelses.size() > currentChannel - 1) {
+//                    currentChannel += 1;
+//                } else {
+//                    currentChannel = 0;
+//                }
+                if(currentChannel>=channelses.size()-1){
+                    currentChannel-=1;
                 }
                 String url;
                 if (menuType == CHANNEL_LIST) {
                     url = channelses.get(currentChannel).getUrl();
-                    channelses.remove(currentChannel == 0 ? 0 : currentChannel - 1);
-                    channelsDao.delete(channelses.get(currentChannel == 0 ? 0 : currentChannel - 1));
+                    channelsDao.delete(channelses.get(currentChannel));
+                    channelses.remove(currentChannel);
                 } else {
                     url = collectionChannels.get(currentChannel).getUrl();
                 }
-                mVideoView.setVideoURI(Uri.parse(parseUrl(url)));
-
+                mVideoView.setVideoURI(Uri.parse(url));
                 if (popupWindow.isShowing())
                     channelAdapter.notifyDataSetChanged();
                 return true;
@@ -285,22 +293,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
 
     /**
-     * 处理播放路径
-     *
-     * @param str
-     * @return
-     */
-
-    private String parseUrl(String str) {
-        String url = new String();
-        if (!str.startsWith("http")) {
-            url = "http://" + str;
-        } else
-            url = str;
-        return url;
-    }
-
-    /**
      * 初始化频道信息
      */
     private void initChannels() {
@@ -322,7 +314,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
             Log.e("Main", "数据库取出频道列表：" + channelses.size());
             collectionChannels = (ArrayList<Channels>) channelsDao.queryBuilder().where(ChannelsDao.Properties.Collection.eq(true)).list();
         }
-        mVideoView.setVideoURI(Uri.parse(parseUrl(channelses.get(currentChannel).getUrl())));
+        mVideoView.setVideoURI(Uri.parse(channelses.get(currentChannel).getUrl()));
     }
 
     /**
@@ -344,6 +336,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         scaleRadioGroup = (RadioGroup) view.findViewById(R.id.rg_scalet);
         inputPath = (EditText) view.findViewById(R.id.et_video_path);
         playInputPath = (Button) view.findViewById(R.id.bt_play_url);
+
+        inputchannelList = (Button) view.findViewById(R.id.bt_channelist_input);
+        saveChannelList = (Button) view.findViewById(R.id.bt_channelist_save);
+        inputchannelList.setOnClickListener(this);
+        saveChannelList.setOnClickListener(this);
 
         playInputPath.setOnClickListener(this);
         channelButton.setOnClickListener(this);
@@ -395,16 +392,16 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Toast.makeText(MainActivity.this, channelses.get(position).getName(), Toast.LENGTH_LONG).show();
         currentChannel = position;
-        SPEditor.putInt(LAST_CANNEL, position);
+        SPEditor.putInt(LAST_CHANNEL, position);
         SPEditor.apply();
         Uri srcUri;
         /**
          * 区分是收藏列表点击还是频道列表点击
          */
         if (menuType == CHANNEL_LIST) {
-            srcUri = Uri.parse(parseUrl(channelses.get(currentChannel).getUrl()));
+            srcUri = Uri.parse(channelses.get(currentChannel).getUrl());
         } else {
-            srcUri = Uri.parse(parseUrl(collectionChannels.get(currentChannel).getUrl()));
+            srcUri = Uri.parse(collectionChannels.get(currentChannel).getUrl());
         }
         mVideoView.setVideoURI(srcUri);
     }
@@ -439,7 +436,44 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                     showToast("输入路径不能为空！");
                 }
                 break;
+            case R.id.bt_channelist_save:
+                //保存频道信息至SD卡
+                saveChannleListToSD();
+                break;
+            case R.id.bt_channelist_input:
+                readChannelListFromSD();
+                //从SD卡导入频道信息
+                break;
         }
+    }
+
+    /**
+     * 保存频道列表至本地SD卡
+     */
+    private void saveChannleListToSD() {
+        JsonsRootBean rootBean = new JsonsRootBean();
+        rootBean.setState("updata");
+        rootBean.setChannels((ArrayList<Channels>) channelses);
+        Gson gson = new GsonBuilder().disableHtmlEscaping().create();
+        String result = gson.toJson(rootBean);
+        Kutils.putStringToSD(result, "");
+        showToast("导出节目列表成功！/n 路径为SD卡根目录 ");
+    }
+
+    /**
+     * 从SD卡载入频道列表
+     */
+    private void readChannelListFromSD() {
+        String json = Kutils.getStringFromSD("mnt/sdcard/kk_channles.json");
+        JsonsRootBean rootBean = (JsonsRootBean) new Gson().fromJson(json, JsonsRootBean.class);
+        channelses = rootBean.getChannels();
+        Comparator comparator = new ComparatorChannels();
+        Collections.sort(channelses, comparator);
+        channelsDao.deleteAll();
+        for (Channels channels : channelses) {
+            channelsDao.insert(channels);
+        }
+
     }
 
 
